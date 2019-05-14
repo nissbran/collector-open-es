@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DevOpen.Domain.CreditApplication\DevOpen.Domain.CreditApplication.csproj" />
+    <ProjectReference Include="..\DevOpen.Domain\DevOpen.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Handlers" />
+    <Folder Include="Repositories\Views" />
+    <Folder Include="Services" />
+  </ItemGroup>
+</Project>
