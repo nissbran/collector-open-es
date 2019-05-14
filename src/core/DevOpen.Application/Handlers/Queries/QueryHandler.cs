@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using DevOpen.Domain;
+using DevOpen.ReadModel;
 
 namespace DevOpen.Application.Handlers.Queries
 {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DevOpen.Application.Handlers.Queries;
 using DevOpen.Domain;
+using DevOpen.ReadModel;
 
 namespace DevOpen.Application.Mediators
 {

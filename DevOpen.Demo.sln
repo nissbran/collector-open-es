@@ -17,9 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpen.Infrastructure", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hosts", "hosts", "{CE922E71-8CB9-4B11-876F-40BD47024B52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpen.Domain.CreditApplication", "src\core\DevOpen.Domain.CreditApplication\DevOpen.Domain.CreditApplication.csproj", "{E59772A4-75C7-4175-A446-8690BCAD1819}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpen.Domain.LoanApplication", "src\core\DevOpen.Domain.LoanApplication\DevOpen.Domain.LoanApplication.csproj", "{E59772A4-75C7-4175-A446-8690BCAD1819}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpen.Hosts.Api", "src\hosts\DevOpen.Hosts.Api\DevOpen.Hosts.Api.csproj", "{AC424BE6-C905-464D-AB8A-803092A33632}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpen.ReadModel", "src\core\DevOpen.ReadModel\DevOpen.ReadModel.csproj", "{CDFD4A36-500B-47BB-A630-899B4E8A2CB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{AC424BE6-C905-464D-AB8A-803092A33632}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC424BE6-C905-464D-AB8A-803092A33632}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC424BE6-C905-464D-AB8A-803092A33632}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDFD4A36-500B-47BB-A630-899B4E8A2CB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDFD4A36-500B-47BB-A630-899B4E8A2CB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDFD4A36-500B-47BB-A630-899B4E8A2CB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDFD4A36-500B-47BB-A630-899B4E8A2CB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{CE922E71-8CB9-4B11-876F-40BD47024B52} = {C2ACA119-C19E-4897-94C5-2E272C292658}
 		{E59772A4-75C7-4175-A446-8690BCAD1819} = {3D24F23D-72E4-4CE2-B369-AA55D4CA7DC3}
 		{AC424BE6-C905-464D-AB8A-803092A33632} = {CE922E71-8CB9-4B11-876F-40BD47024B52}
+		{CDFD4A36-500B-47BB-A630-899B4E8A2CB2} = {3D24F23D-72E4-4CE2-B369-AA55D4CA7DC3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42F20AC3-A69D-4DA5-8846-1B8A7698316A}

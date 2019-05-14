@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using DevOpen.Application.Mediators;
 using DevOpen.Domain;
 
-namespace DevOpen.Application.Handlers.Commands
+namespace DevOpen.Application.Handlers
 {
     public abstract class CommandHandler<T> : ICommandHandler<T>
         where T : Command
