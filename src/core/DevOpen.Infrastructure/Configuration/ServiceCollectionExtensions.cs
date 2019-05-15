@@ -1,4 +1,5 @@
 using DevOpen.Application.Handlers;
+using DevOpen.Application.Handlers.Commands;
 using DevOpen.Application.Handlers.Queries;
 using DevOpen.Application.Mediators;
 using DevOpen.Application.Repositories;
@@ -38,7 +39,7 @@ namespace DevOpen.Infrastructure.Configuration
         {
             services.AddSingleton<ILoanApplicationRepository, LoanApplicationRootRepository>();
             services.AddSingleton<ILoanApplicationViewRepository, LoanApplicationViewRepository>();
-            //services.AddSingleton<ICreditRootRepository, CreditRootRepository>();
+            services.AddSingleton<ICreditRootRepository, CreditRootRepository>();
         }
         
         public static void AddEventStore(this IServiceCollection services)
@@ -47,7 +48,7 @@ namespace DevOpen.Infrastructure.Configuration
                 new IEventSchema[]
                 {
                     new LoanApplicationSchema(), 
-                    //new CreditSchema(),
+                    new CreditSchema()
                 }));
             
             services.AddSingleton<IEventStore>(provider =>

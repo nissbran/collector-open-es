@@ -1,6 +1,6 @@
 using EventStore.ClientAPI;
 
-namespace DevOpen.Infrastructure.Subscriptions.EventStore
+namespace DevOpen.Infrastructure.Subscriptions
 {
     public class CatchAllSubscriptionSettings : SubscriptionSettings
     {

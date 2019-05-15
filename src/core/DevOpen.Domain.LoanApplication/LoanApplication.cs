@@ -6,19 +6,19 @@ using DevOpen.Domain.Projections;
 
 namespace DevOpen.Domain
 {
-    public class LoanApplication : AggregateRoot<LoanApplicationId, LoanApplicationStateProjection>
+    public class LoanApplication : AggregateRoot<LoanApplicationId, LoanApplicationState>
     {
         public LoanApplicationId Id => State.Id;
 
-        private LoanApplication(LoanApplicationStateProjection state) : base(state)
+        private LoanApplication(LoanApplicationState state) : base(state)
         {
         }
 
-        public LoanApplication(LoanApplicationId id, IEnumerable<LoanApplicationDomainEvent> historicEvents) : this(new LoanApplicationStateProjection(id, historicEvents))
+        public LoanApplication(LoanApplicationId id, IEnumerable<LoanApplicationDomainEvent> historicEvents) : this(new LoanApplicationState(id, historicEvents))
         {
         }
         
-        public LoanApplication(LoanApplicationId id, RegisterLoanApplication cmd) : this(new LoanApplicationStateProjection(id))
+        public LoanApplication(LoanApplicationId id, RegisterLoanApplication cmd) : this(new LoanApplicationState(id))
         {
             ApplyChange(new LoanApplicationRegistered(cmd.OrganisationNumber, cmd.RequestedAmount));
             

@@ -28,7 +28,13 @@ namespace DevOpen.Hosts.Api
             await commandMediator.MediateCommand(new ApproveLoanApplication(applicationId));
 
             var view = await queryMediator.MediateQuery(new GetLoanApplicationByIdQuery(applicationId));
-            
+
+            await commandMediator.MediateCommand(new RegisterCredit(CreditId.NewId())
+            {
+                LoanAmount = Money.Create(100000, Currency.SEK),
+                OrganisationNumber = new OrganisationNumber("5561682518", Country.Sweden)
+            });
+
         }
     }
 }

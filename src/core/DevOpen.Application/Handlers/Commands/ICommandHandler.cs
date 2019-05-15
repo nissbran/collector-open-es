@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using DevOpen.Application.Mediators;
 using DevOpen.Domain;
 
-namespace DevOpen.Application.Handlers
+namespace DevOpen.Application.Handlers.Commands
 {
     public interface ICommandHandler
     {

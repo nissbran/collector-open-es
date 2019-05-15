@@ -6,7 +6,7 @@ using EventStore.ClientAPI;
 using EventStore.ClientAPI.Exceptions;
 using Serilog;
 
-namespace DevOpen.Infrastructure.Subscriptions.EventStore
+namespace DevOpen.Infrastructure.Subscriptions
 {
     public abstract class EventStoreCatchUpAllSubscriber : EventStoreSubscriber
     {

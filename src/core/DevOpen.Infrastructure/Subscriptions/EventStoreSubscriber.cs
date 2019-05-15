@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using EventStore.ClientAPI;
 
-namespace DevOpen.Infrastructure.Subscriptions.EventStore
+namespace DevOpen.Infrastructure.Subscriptions
 {
     public abstract class EventStoreSubscriber
     {

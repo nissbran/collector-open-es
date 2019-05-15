@@ -1,9 +1,11 @@
-﻿namespace DevOpen.Infrastructure.Serialization.Schemas
+﻿using DevOpen.Domain.Events;
+
+namespace DevOpen.Infrastructure.Serialization.Schemas
 {
-//    public class CreditSchema : EventSchema<CreditDomainEvent>
-//    {
-//        public const string SchemaName = "Credit";
-//
-//        public override string Name => SchemaName;
-//    }
+    public class CreditSchema : EventSchema<CreditDomainEvent>
+    {
+        public const string SchemaName = "Credit";
+
+        public override string Name => SchemaName;
+    }
 }

@@ -1,4 +1,4 @@
-namespace DevOpen.Infrastructure.Subscriptions.EventStore
+namespace DevOpen.Infrastructure.Subscriptions
 {
     public class SubscriptionSettings
     {

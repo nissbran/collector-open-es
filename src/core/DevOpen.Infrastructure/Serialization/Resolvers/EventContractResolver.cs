@@ -11,9 +11,16 @@ namespace DevOpen.Infrastructure.Serialization.Resolvers
         {
             var contract = base.CreateContract(objectType);
 
+            CreateDomainIdsResolvers(ref contract, objectType);
             CreateDomainValueObjectResolvers(ref contract, objectType);
 
             return contract;
+        }
+        
+        private static void CreateDomainIdsResolvers(ref JsonContract contract, Type objectType)
+        {
+            if (objectType == typeof(DisbursementId))
+                contract.Converter = new DisbursementIdJsonConverter();
         }
         
         private static void CreateDomainValueObjectResolvers(ref JsonContract contract, Type objectType)

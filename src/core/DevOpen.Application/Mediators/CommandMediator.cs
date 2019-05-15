@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DevOpen.Application.Handlers;
+using DevOpen.Application.Handlers.Commands;
 using DevOpen.Domain;
 
 namespace DevOpen.Application.Mediators

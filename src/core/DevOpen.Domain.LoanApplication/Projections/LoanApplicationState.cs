@@ -4,7 +4,7 @@ using DevOpen.Domain.Model;
 
 namespace DevOpen.Domain.Projections
 {
-    public class LoanApplicationStateProjection : AggregateState<LoanApplicationId>
+    public class LoanApplicationState : AggregateState<LoanApplicationId>
     {
         internal Money RequestedAmount { get; private set; }
         
@@ -13,11 +13,11 @@ namespace DevOpen.Domain.Projections
 
         internal LoanApplicationStatus Status { get; private set; } = LoanApplicationStatus.Registered;
         
-        public LoanApplicationStateProjection(LoanApplicationId id) : base(id)
+        public LoanApplicationState(LoanApplicationId id) : base(id)
         {
         }
 
-        public LoanApplicationStateProjection(LoanApplicationId id, IEnumerable<LoanApplicationDomainEvent> historicEvents) : base(id)
+        public LoanApplicationState(LoanApplicationId id, IEnumerable<LoanApplicationDomainEvent> historicEvents) : base(id)
         {
             foreach (var historicEvent in historicEvents)
             {

@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-namespace DevOpen.Infrastructure.Subscriptions.EventStore
+namespace DevOpen.Infrastructure.Subscriptions
 {
     public class SubscriptionCheckpoint
     {

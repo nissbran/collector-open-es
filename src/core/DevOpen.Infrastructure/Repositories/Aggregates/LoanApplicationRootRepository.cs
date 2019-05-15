@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DevOpen.Application.Repositories;
@@ -33,6 +34,7 @@ namespace DevOpen.Infrastructure.Repositories.Aggregates
             foreach (var uncommittedEvent in application.UncommittedEvents)
             {
                 uncommittedEvent.AggregateId = application.Id;
+                uncommittedEvent.Occurred = DateTimeOffset.Now;
             }
             
             await _eventStore.SaveEvents(new LoanApplicationEventStreamId(application.Id), application.GetExpectedVersion(), application.UncommittedEvents);

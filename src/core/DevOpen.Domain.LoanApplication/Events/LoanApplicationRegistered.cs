@@ -2,7 +2,7 @@
 
 namespace DevOpen.Domain.Events
 {
-    [EventType("CreditApplicationRegistered")]
+    [EventType("LoanApplicationRegistered")]
     public class LoanApplicationRegistered : LoanApplicationDomainEvent
     {
         public OrganisationNumber OrganisationNumber { get; }

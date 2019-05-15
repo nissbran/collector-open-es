@@ -3,8 +3,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DevOpen.Domain.Credit\DevOpen.Domain.Credit.csproj" />
     <ProjectReference Include="..\DevOpen.Domain.LoanApplication\DevOpen.Domain.LoanApplication.csproj" />
     <ProjectReference Include="..\DevOpen.Domain\DevOpen.Domain.csproj" />
     <ProjectReference Include="..\DevOpen.ReadModel\DevOpen.ReadModel.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Processes" />
   </ItemGroup>
 </Project>
