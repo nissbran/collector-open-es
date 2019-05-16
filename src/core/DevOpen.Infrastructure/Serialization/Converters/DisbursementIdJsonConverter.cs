@@ -1,5 +1,6 @@
 using System;
 using DevOpen.Domain.Model;
+using DevOpen.Domain.Model.Credits;
 using Newtonsoft.Json;
 
 namespace DevOpen.Infrastructure.Serialization.Converters

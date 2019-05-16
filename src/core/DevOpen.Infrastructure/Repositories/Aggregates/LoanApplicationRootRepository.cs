@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using DevOpen.Application.Repositories;
 using DevOpen.Domain;
-using DevOpen.Domain.Events;
 using DevOpen.Domain.Model;
+using DevOpen.Domain.Model.LoanApplications;
+using DevOpen.Domain.Model.LoanApplications.Events;
 using DevOpen.Infrastructure.Persistence.EventStore;
 
 namespace DevOpen.Infrastructure.Repositories.Aggregates

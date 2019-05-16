@@ -18,13 +18,6 @@ namespace DevOpen.Domain.Model
 
         public bool IsEmpty => Value == 0;
 
-        public bool Equals(Money other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return Value == other.Value && Equals(Currency, other.Currency);
-        }
-
         public static Money Create(decimal value, Currency currency)
         {
             return new Money(value, currency);
@@ -121,6 +114,13 @@ namespace DevOpen.Domain.Model
         public static Money ToRoundedDown(Money value)
         {
             return new Money(Math.Floor(value.Value), value.Currency);
+        }
+
+        public bool Equals(Money other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Value == other.Value && Equals(Currency, other.Currency);
         }
 
         public override bool Equals(object obj)

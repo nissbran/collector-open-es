@@ -1,4 +1,5 @@
 using DevOpen.Domain.Model;
+using DevOpen.Domain.Model.Credits;
 using DevOpen.Infrastructure.Persistence.EventStore;
 
 namespace DevOpen.Infrastructure.Repositories.Aggregates

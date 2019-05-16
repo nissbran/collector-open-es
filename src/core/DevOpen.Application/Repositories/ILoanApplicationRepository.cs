@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using DevOpen.Domain;
 using DevOpen.Domain.Model;
+using DevOpen.Domain.Model.LoanApplications;
 
 namespace DevOpen.Application.Repositories
 {

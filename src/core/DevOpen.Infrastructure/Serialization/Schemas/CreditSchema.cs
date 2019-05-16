@@ -1,4 +1,4 @@
-﻿using DevOpen.Domain.Events;
+﻿using DevOpen.Domain.Model.Credits.Events;
 
 namespace DevOpen.Infrastructure.Serialization.Schemas
 {

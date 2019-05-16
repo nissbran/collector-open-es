@@ -1,6 +1,8 @@
 using System;
 using DevOpen.Infrastructure.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
 
 namespace DevOpen.Hosts.Api
 {
@@ -10,6 +12,11 @@ namespace DevOpen.Hosts.Api
         
         static Bootstrapper()
         {
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+                .CreateLogger();
+            
             var services = new ServiceCollection();
             
             services.AddApplicationServices();

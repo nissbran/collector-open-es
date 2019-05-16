@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using DevOpen.Domain.Events;
 using DevOpen.Domain.Model;
+using DevOpen.Domain.Model.LoanApplications.Events;
 
 namespace DevOpen.ReadModel.LoanApplications
 {

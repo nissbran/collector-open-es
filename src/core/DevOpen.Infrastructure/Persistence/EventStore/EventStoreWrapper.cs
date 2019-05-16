@@ -12,12 +12,12 @@ namespace DevOpen.Infrastructure.Persistence.EventStore
     {
         private const int ReadBatchSize = 200;
 
-        private readonly IEventStoreConnection _connection;
+        private readonly IEventStoreConnectionProvider _connectionProvider;
         private readonly IEventSerializer _eventSerializer;
 
-        public EventStoreWrapper(IEventStoreConnection connection, IEventSerializer eventSerializer)
+        public EventStoreWrapper(IEventStoreConnectionProvider connectionProvider, IEventSerializer eventSerializer)
         {
-            _connection = connection;
+            _connectionProvider = connectionProvider;
             _eventSerializer = eventSerializer;
         }
 
@@ -34,7 +34,7 @@ namespace DevOpen.Infrastructure.Persistence.EventStore
             var nextSliceStart = streamVersion;
             do
             {
-                currentSlice = await _connection.ReadStreamEventsForwardAsync(
+                currentSlice = await _connectionProvider.Connection.ReadStreamEventsForwardAsync(
                     stream: streamName,
                     start: nextSliceStart,
                     count: ReadBatchSize,
@@ -59,7 +59,7 @@ namespace DevOpen.Infrastructure.Persistence.EventStore
             var expectedVersion = streamVersion == 0 ? ExpectedVersion.NoStream : streamVersion - 1;
             var eventsToSave = events.Select(domainEvent => ToEventData(commitId, domainEvent)).ToList();
 
-            var result = await _connection.AppendToStreamAsync(
+            var result = await _connectionProvider.Connection.AppendToStreamAsync(
                 stream: eventStreamId.ToString(),
                 expectedVersion: expectedVersion,
                 events: eventsToSave);

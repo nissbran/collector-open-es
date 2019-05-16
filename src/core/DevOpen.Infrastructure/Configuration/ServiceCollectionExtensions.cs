@@ -2,6 +2,7 @@ using DevOpen.Application.Handlers;
 using DevOpen.Application.Handlers.Commands;
 using DevOpen.Application.Handlers.Queries;
 using DevOpen.Application.Mediators;
+using DevOpen.Application.Processes;
 using DevOpen.Application.Repositories;
 using DevOpen.Infrastructure.Persistence.EventStore;
 using DevOpen.Infrastructure.Repositories;
@@ -21,6 +22,7 @@ namespace DevOpen.Infrastructure.Configuration
         {
             services.AddSingleton<CommandMediator>();
             services.AddSingleton<QueryMediator>();
+            services.AddSingleton<ProcessManagerMediator>();
             
             services.Scan(scan => scan
                 .FromAssembliesOf(typeof(ICommandHandler))
@@ -31,6 +33,12 @@ namespace DevOpen.Infrastructure.Configuration
             services.Scan(scan => scan
                 .FromAssembliesOf(typeof(IQueryHandler))
                 .AddClasses(classes => classes.AssignableTo(typeof(IQueryHandler)))
+                .AsImplementedInterfaces()
+            );
+            
+            services.Scan(scan => scan
+                .FromAssembliesOf(typeof(IProcessManager))
+                .AddClasses(classes => classes.AssignableTo(typeof(IProcessManager)))
                 .AsImplementedInterfaces()
             );
         }
@@ -50,17 +58,9 @@ namespace DevOpen.Infrastructure.Configuration
                     new LoanApplicationSchema(), 
                     new CreditSchema()
                 }));
-            
-            services.AddSingleton<IEventStore>(provider =>
-            {
-                var connection = EventStoreConnectionFactory.Create(
-                    "ConnectTo=tcp://localhost:1113",
-                    "admin", "changeit");
 
-                connection.ConnectAsync().Wait();
-                
-                return new EventStoreWrapper(connection, provider.GetRequiredService<IEventSerializer>());
-            });
+            services.AddSingleton<IEventStoreConnectionProvider, EventStoreConnectionProvider>();
+            services.AddSingleton<IEventStore, EventStoreWrapper>();
         }
     }
 }

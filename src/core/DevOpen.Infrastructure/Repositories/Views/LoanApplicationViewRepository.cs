@@ -1,7 +1,8 @@
 using System.Linq;
 using System.Threading.Tasks;
-using DevOpen.Domain.Events;
 using DevOpen.Domain.Model;
+using DevOpen.Domain.Model.LoanApplications;
+using DevOpen.Domain.Model.LoanApplications.Events;
 using DevOpen.Infrastructure.Persistence.EventStore;
 using DevOpen.Infrastructure.Repositories.Aggregates;
 using DevOpen.ReadModel.LoanApplications;

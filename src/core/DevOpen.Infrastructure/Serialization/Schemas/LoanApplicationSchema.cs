@@ -1,4 +1,4 @@
-﻿using DevOpen.Domain.Events;
+﻿using DevOpen.Domain.Model.LoanApplications.Events;
 
 namespace DevOpen.Infrastructure.Serialization.Schemas
 {

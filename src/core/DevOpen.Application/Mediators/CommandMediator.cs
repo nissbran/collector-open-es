@@ -19,17 +19,17 @@ namespace DevOpen.Application.Mediators
         
         public async Task<CommandExecutionResult> MediateCommand(Command command)
         {
-            var queryHandler = GetCommandHandlerFor(command.GetType());
+            var commandHandler = GetCommandHandlerFor(command.GetType());
             
-            return await queryHandler.Handle(command);
+            return await commandHandler.Handle(command);
         }
         
         private ICommandHandler GetCommandHandlerFor(Type command)
         {
-            if (!_commandHandlers.TryGetValue(command, out var queryHandler))
+            if (!_commandHandlers.TryGetValue(command, out var commandHandler))
                 throw new ArgumentException($"Command handler for {command.Name} could not be found.");
 
-            return queryHandler;
+            return commandHandler;
         }
     }
 }

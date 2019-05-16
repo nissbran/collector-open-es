@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using DevOpen.Application.Mediators;
 using DevOpen.Application.Repositories;
-using DevOpen.Domain.Commands;
+using DevOpen.Domain.Model.Credits.Commands;
 
 namespace DevOpen.Application.Handlers.Commands.Credits
 {
