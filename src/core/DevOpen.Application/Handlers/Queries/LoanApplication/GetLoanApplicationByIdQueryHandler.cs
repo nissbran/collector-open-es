@@ -3,7 +3,7 @@ using DevOpen.ReadModel.LoanApplications;
 
 namespace DevOpen.Application.Handlers.Queries.LoanApplication
 {
-    public class GetLoanApplicationByIdQueryHandler : QueryHandler<GetLoanApplicationByIdQuery, LoanApplicationView>
+    public class GetLoanApplicationByIdQueryHandler : QueryHandler<GetLoanApplicationByIdQuery, LoanApplicationViewModel>
     {
         private readonly ILoanApplicationViewRepository _viewRepository;
 
@@ -12,7 +12,7 @@ namespace DevOpen.Application.Handlers.Queries.LoanApplication
             _viewRepository = viewRepository;
         }
         
-        public override async Task<LoanApplicationView> Handle(GetLoanApplicationByIdQuery query)
+        public override async Task<LoanApplicationViewModel> Handle(GetLoanApplicationByIdQuery query)
         {
             return await _viewRepository.GetById(query.ApplicationId);
         }

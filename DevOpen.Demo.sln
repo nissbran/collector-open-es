@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpen.ReadModel", "src\co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpen.Hosts.ProcessManager", "src\hosts\DevOpen.Hosts.ProcessManager\DevOpen.Hosts.ProcessManager.csproj", "{9AC49728-E2B8-4047-8CE3-7E4C95B47FBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpen.Hosts.ReadModelBuilder", "src\hosts\DevOpen.Hosts.ReadModelBuilder\DevOpen.Hosts.ReadModelBuilder.csproj", "{6F856BA4-9291-457A-A9B6-698E50815D68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{9AC49728-E2B8-4047-8CE3-7E4C95B47FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AC49728-E2B8-4047-8CE3-7E4C95B47FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AC49728-E2B8-4047-8CE3-7E4C95B47FBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F856BA4-9291-457A-A9B6-698E50815D68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F856BA4-9291-457A-A9B6-698E50815D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F856BA4-9291-457A-A9B6-698E50815D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F856BA4-9291-457A-A9B6-698E50815D68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{AC424BE6-C905-464D-AB8A-803092A33632} = {CE922E71-8CB9-4B11-876F-40BD47024B52}
 		{CDFD4A36-500B-47BB-A630-899B4E8A2CB2} = {3D24F23D-72E4-4CE2-B369-AA55D4CA7DC3}
 		{9AC49728-E2B8-4047-8CE3-7E4C95B47FBA} = {CE922E71-8CB9-4B11-876F-40BD47024B52}
+		{6F856BA4-9291-457A-A9B6-698E50815D68} = {CE922E71-8CB9-4B11-876F-40BD47024B52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42F20AC3-A69D-4DA5-8846-1B8A7698316A}
