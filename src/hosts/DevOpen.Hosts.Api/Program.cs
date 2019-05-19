@@ -6,6 +6,7 @@ using DevOpen.Domain.Model.Credits.Commands;
 using DevOpen.Domain.Model.LoanApplications;
 using DevOpen.Domain.Model.LoanApplications.Commands;
 using DevOpen.Infrastructure.Persistence.EventStore;
+using DevOpen.ReadModel.Credits;
 using DevOpen.ReadModel.LoanApplications;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,10 +28,11 @@ namespace DevOpen.Hosts.Api
             
             // Register a new application
             var applicationId = LoanApplicationId.NewId();
+            var organisationNumber = new OrganisationNumber("5561682518", Country.Sweden);
 
             var registerApplicationCommand = new RegisterLoanApplication(applicationId)
             {
-                OrganisationNumber = new OrganisationNumber("5561682518", Country.Sweden),
+                OrganisationNumber = organisationNumber,
                 RequestedAmount = Money.Create(100000, Currency.SEK),
                 VisitingAddress = new Address("Demogatan 1", string.Empty, "41420", "Göteborg", "Sverige", string.Empty)
             };
@@ -42,9 +44,16 @@ namespace DevOpen.Hosts.Api
             await commandMediator.MediateCommand(new ApproveLoanApplication(applicationId));
 
             
+            
+            
             // Get data 
-            var view = await queryMediator.MediateQuery(new GetLoanApplicationByIdQuery(applicationId));
+            var loanApplicationView = await queryMediator.MediateQuery(new GetLoanApplicationById(applicationId));
 
+            
+            // Credits for org number
+            var credits = await queryMediator.MediateQuery(new GetCreditsByOrganisationNumber(organisationNumber));
+            
+            
             
             
             await commandMediator.MediateCommand(new RegisterCredit(CreditId.NewId())

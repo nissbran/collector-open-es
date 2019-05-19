@@ -28,7 +28,7 @@ namespace DevOpen.Application.Processes
             {
                 case ApplicationApproved applicationApproved:
                     
-                    var application = await _queryMediator.MediateQuery(new GetLoanApplicationByIdQuery(applicationApproved.ApplicationId));
+                    var application = await _queryMediator.MediateQuery(new GetLoanApplicationById(applicationApproved.ApplicationId));
 
                     var creditId = CreditId.NewId();
                     

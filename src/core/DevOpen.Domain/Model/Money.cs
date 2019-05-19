@@ -101,21 +101,6 @@ namespace DevOpen.Domain.Model
         public static implicit operator string(Money money) => money.Value.ToString(CultureInfo.InvariantCulture);
         public static implicit operator Money(string value) => Parse(value);
 
-        public static Money ToRounded(Money value)
-        {
-            return new Money(Math.Round(value.Value, 2), value.Currency);
-        }
-
-        public static Money ToRoundedUp(Money value)
-        {
-            return new Money(Math.Ceiling(value.Value), value.Currency);
-        }
-
-        public static Money ToRoundedDown(Money value)
-        {
-            return new Money(Math.Floor(value.Value), value.Currency);
-        }
-
         public bool Equals(Money other)
         {
             if (ReferenceEquals(null, other)) return false;

@@ -15,10 +15,25 @@ services:
       interval: 5s
       timeout: 2s
     networks: 
-      clnetwork:
+      devopennetwork:
         aliases: 
           - eventstore
+  readmodel_sqlserver:
+    build:
+      context: ./docker/readmodel/
+      dockerfile: Dockerfile
+    container_name: readmodel_sqlserver
+    ports:
+      - 1433:1433
+    healthcheck:
+      test: sqlcmd -S readmodel -U SA -P 'GqMxaCiCKEzWTT6hdMwBDArb7ZnHboVmawNgL7YFkNU2A' -Q 'select 1'
+      interval: 10s
+      timeout: 5s
+    networks:
+      devopennetwork:
+        aliases:
+          - readmodel
 
 networks:
-  clnetwork:
+  devopennetwork:
     driver: bridge

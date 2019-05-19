@@ -34,7 +34,7 @@ namespace DevOpen.Domain.Model.Credits.Projections
             {
                 case CreditRegistered creditRegistered:
                     LoanAmount = creditRegistered.LoanAmount;
-                    Balance = Money.Create(0, LoanAmount.Currency);
+                    Balance = Money.Create(0, creditRegistered.LoanAmount.Currency);
                     break;
                 
                 case DisbursementPayoutInitialized payoutInitialized:

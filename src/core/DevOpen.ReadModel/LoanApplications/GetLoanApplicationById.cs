@@ -2,11 +2,11 @@ using DevOpen.Domain.Model.LoanApplications;
 
 namespace DevOpen.ReadModel.LoanApplications
 {
-    public class GetLoanApplicationByIdQuery : Query<LoanApplicationViewModel>
+    public class GetLoanApplicationById : Query<LoanApplicationViewModel>
     {
         public LoanApplicationId ApplicationId { get; }
 
-        public GetLoanApplicationByIdQuery(LoanApplicationId applicationId)
+        public GetLoanApplicationById(LoanApplicationId applicationId)
         {
             ApplicationId = applicationId;
         }
