@@ -1,7 +1,7 @@
 using DevOpen.Domain.Model;
 using DevOpen.Domain.Model.LoanApplications;
 
-namespace DevOpen.ReadModel.LoanApplications
+namespace DevOpen.ReadModel.LoanApplications.Model
 {
     public class LoanApplicationViewModel
     {

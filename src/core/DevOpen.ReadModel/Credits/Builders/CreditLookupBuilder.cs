@@ -1,8 +1,9 @@
 using System.Threading.Tasks;
 using DevOpen.Domain;
 using DevOpen.Domain.Model.Credits.Events;
+using Serilog;
 
-namespace DevOpen.ReadModel.Credits
+namespace DevOpen.ReadModel.Credits.Builders
 {
     public class CreditLookupBuilder : IReadModelBuilder
     {
@@ -18,6 +19,7 @@ namespace DevOpen.ReadModel.Credits
             switch (domainEvent)
             {
                 case CreditRegistered creditRegistered:
+                    Log.Information("Handling {Event}, adding credit to lookup read model", nameof(CreditRegistered));
                     await _creditLookup.AddCreditToLookup(creditRegistered.Id, creditRegistered.OrganisationNumber);
                     break;
             }

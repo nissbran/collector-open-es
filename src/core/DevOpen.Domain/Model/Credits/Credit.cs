@@ -25,15 +25,10 @@ namespace DevOpen.Domain.Model.Credits
                 ApplyChange(new CreditRegisteredFromLoanApplication(cmd.ApplicationId.Value));
         }
 
-        public void InitializeDisbursementPayout(Money amount)
+        public void RegisterDisbursementPayout(Money amount)
         {
-            if (Math.Abs(State.Balance - amount) < State.LoanAmount)
-                ApplyChange(new DisbursementPayoutInitialized(DisbursementId.NewId(), amount));
-        }
-
-        public void RegisterDisbursementPayout(DisbursementId disbursementId, DateTimeOffset registeredDate)
-        {
-            ApplyChange(new DisbursementPayoutRegistered(disbursementId, registeredDate));
+            if (Math.Abs(State.Balance - amount) <= State.LoanAmount)
+                ApplyChange(new DisbursementRegistered(DisbursementId.NewId(), amount));
         }
     }
 }

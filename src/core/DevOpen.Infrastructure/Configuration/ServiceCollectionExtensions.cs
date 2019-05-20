@@ -56,6 +56,7 @@ namespace DevOpen.Infrastructure.Configuration
             services.AddSingleton<ILoanApplicationRepository, LoanApplicationRootRepository>();
             services.AddSingleton<ILoanApplicationViewRepository, LoanApplicationViewRepository>();
             services.AddSingleton<ICreditRootRepository, CreditRootRepository>();
+            services.AddSingleton<ICreditViewRepository, CreditViewRepository>();
 
             services.AddSingleton<ICreditLookup, CreditSqlLookup>();
             services.AddSingleton<SubscriptionCheckpointStorage>();

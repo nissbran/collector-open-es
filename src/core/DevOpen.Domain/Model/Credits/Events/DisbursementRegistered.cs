@@ -1,12 +1,12 @@
 namespace DevOpen.Domain.Model.Credits.Events
 {
-    [EventType("DisbursementPayoutInitialized")]
-    public class DisbursementPayoutInitialized : CreditDomainEvent
+    [EventType("DisbursementRegistered")]
+    public class DisbursementRegistered : CreditDomainEvent
     {
         public DisbursementId DisbursementId { get; }
         public Money Amount { get; }
 
-        public DisbursementPayoutInitialized(DisbursementId disbursementId, Money amount)
+        public DisbursementRegistered(DisbursementId disbursementId, Money amount)
         {
             DisbursementId = disbursementId;
             Amount = amount;

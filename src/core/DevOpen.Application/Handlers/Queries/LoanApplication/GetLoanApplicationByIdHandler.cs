@@ -1,13 +1,14 @@
 using System.Threading.Tasks;
 using DevOpen.ReadModel.LoanApplications;
+using DevOpen.ReadModel.LoanApplications.Model;
 
 namespace DevOpen.Application.Handlers.Queries.LoanApplication
 {
-    public class GetLoanApplicationByIdQueryHandler : QueryHandler<GetLoanApplicationById, LoanApplicationViewModel>
+    public class GetLoanApplicationByIdHandler : QueryHandler<GetLoanApplicationById, LoanApplicationViewModel>
     {
         private readonly ILoanApplicationViewRepository _viewRepository;
 
-        public GetLoanApplicationByIdQueryHandler(ILoanApplicationViewRepository viewRepository)
+        public GetLoanApplicationByIdHandler(ILoanApplicationViewRepository viewRepository)
         {
             _viewRepository = viewRepository;
         }

@@ -20,7 +20,7 @@ namespace DevOpen.Infrastructure.Persistence.Sql
             
             using (var connection = new SqlConnection(ConnectionString))
             {
-                const string sql = "UPDATE SubscriptionCheckpoint SET LastProcessedPosition = @checkpoint, EventsProcessed = @eventsProcessed, UpdatedUtc = @updated WHERE Id = @subscriptionId";
+                const string sql = "UPDATE SubscriptionCheckpoint SET LastProcessedPosition = @checkpoint, EventsProcessed = @eventsProcessed, UpdatedUtc = @updated WHERE SubscriptionId = @subscriptionId";
                 
                 await connection.OpenAsync();
 
@@ -52,6 +52,8 @@ namespace DevOpen.Infrastructure.Persistence.Sql
                     {
                         if (reader.HasRows)
                         {
+                            reader.Read();
+                            
                             return new SubscriptionCheckpoint(
                                 Guid.Parse(Convert.ToString(reader["SubscriptionId"])),
                                 Convert.ToInt64(reader["LastProcessedPosition"]),
@@ -71,7 +73,7 @@ namespace DevOpen.Infrastructure.Persistence.Sql
             
             using (var connection = new SqlConnection(ConnectionString))
             {
-                const string sql = "INSERT INTO SubscriptionCheckpoint (Id, LastProcessedPosition, EventsProcessed, UpdatedUtc) VALUES (@subscriptionId, 0, 0, @updated)";
+                const string sql = "INSERT INTO SubscriptionCheckpoint (SubscriptionId, LastProcessedPosition, EventsProcessed, UpdatedUtc) VALUES (@subscriptionId, 0, 0, @updated)";
                 
                 connection.Open();
 

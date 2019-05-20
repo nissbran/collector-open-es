@@ -37,15 +37,9 @@ namespace DevOpen.Domain.Model.Credits.Projections
                     Balance = Money.Create(0, creditRegistered.LoanAmount.Currency);
                     break;
                 
-                case DisbursementPayoutInitialized payoutInitialized:
-                    _disbursements.Add(new Disbursement(payoutInitialized.DisbursementId, payoutInitialized.Amount));
+                case DisbursementRegistered disbursementRegistered:
+                    _disbursements.Add(new Disbursement(disbursementRegistered.DisbursementId, disbursementRegistered.Amount));
                     break;
-                
-                case DisbursementPayoutRegistered payoutRegistered:
-                    var disbursement = _disbursements.Single(d => d.Id == payoutRegistered.DisbursementId);
-                    disbursement.Register(payoutRegistered.RegistrationDate);
-                    break;
-                
             }
         }
     }

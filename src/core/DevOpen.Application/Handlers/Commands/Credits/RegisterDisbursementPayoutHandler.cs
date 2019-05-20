@@ -5,20 +5,20 @@ using DevOpen.Domain.Model.Credits.Commands;
 
 namespace DevOpen.Application.Handlers.Commands.Credits
 {
-    public class InitializeDisbursementPayoutHandler : CommandHandler<InitializeDisbursementPayout>
+    public class RegisterDisbursementPayoutHandler : CommandHandler<RegisterDisbursementPayout>
     {
         private readonly ICreditRootRepository _repository;
 
-        public InitializeDisbursementPayoutHandler(ICreditRootRepository repository)
+        public RegisterDisbursementPayoutHandler(ICreditRootRepository repository)
         {
             _repository = repository;
         }
         
-        public override async Task<CommandExecutionResult> Handle(InitializeDisbursementPayout command)
+        public override async Task<CommandExecutionResult> Handle(RegisterDisbursementPayout command)
         {
             var credit = await _repository.GetById(command.Id);
             
-            credit.InitializeDisbursementPayout(command.Amount);
+            credit.RegisterDisbursementPayout(command.Amount);
 
             await _repository.Save(credit);
             

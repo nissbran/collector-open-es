@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using DevOpen.Application.Mediators;
 using DevOpen.Domain.Model;
-using DevOpen.Domain.Model.Credits;
 using DevOpen.Domain.Model.Credits.Commands;
 using DevOpen.Domain.Model.LoanApplications;
 using DevOpen.Domain.Model.LoanApplications.Commands;
@@ -52,15 +52,15 @@ namespace DevOpen.Hosts.Api
             
             // Credits for org number
             var credits = await queryMediator.MediateQuery(new GetCreditsByOrganisationNumber(organisationNumber));
+
             
+
+            // Register disbursement payout
+            await commandMediator.MediateCommand(new RegisterDisbursementPayout(credits.FirstOrDefault(), Money.Create(100000, Currency.SEK)));
+
             
-            
-            
-            await commandMediator.MediateCommand(new RegisterCredit(CreditId.NewId())
-            {
-                LoanAmount = Money.Create(100000, Currency.SEK),
-                OrganisationNumber = new OrganisationNumber("5561682518", Country.Sweden)
-            });
+            // Get credit data
+            var creditView = await queryMediator.MediateQuery(new GetCreditById(credits.FirstOrDefault()));
 
         }
     }

@@ -5,11 +5,11 @@ using DevOpen.ReadModel.Credits;
 
 namespace DevOpen.Application.Handlers.Queries.Credits
 {
-    public class GetCreditsByOrganisationNumberQueryHandler : QueryHandler<GetCreditsByOrganisationNumber, IList<CreditId>>
+    public class GetCreditsByOrganisationNumberHandler : QueryHandler<GetCreditsByOrganisationNumber, IList<CreditId>>
     {
         private readonly ICreditLookup _creditLookup;
 
-        public GetCreditsByOrganisationNumberQueryHandler(ICreditLookup creditLookup)
+        public GetCreditsByOrganisationNumberHandler(ICreditLookup creditLookup)
         {
             _creditLookup = creditLookup;
         }

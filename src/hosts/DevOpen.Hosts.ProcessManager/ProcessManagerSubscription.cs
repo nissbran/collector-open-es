@@ -43,7 +43,7 @@ namespace DevOpen.Hosts.ProcessManager
         protected override async Task EventAppeared(ResolvedEvent resolvedEvent, long currentPosition)
         {
             var domainEvent = _eventSerializer.DeserializeEvent(resolvedEvent);
-
+            
             await _mediator.MediateEvent(domainEvent);
         }
         
