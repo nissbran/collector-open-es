@@ -1,6 +1,7 @@
 using System;
 using DevOpen.Domain.Model;
 using DevOpen.Domain.Model.Credits;
+using DevOpen.Domain.Model.LoanApplications;
 using DevOpen.Infrastructure.Serialization.Converters;
 using Newtonsoft.Json.Serialization;
 
@@ -22,6 +23,10 @@ namespace DevOpen.Infrastructure.Serialization.Resolvers
         {
             if (objectType == typeof(DisbursementId))
                 contract.Converter = new DisbursementIdJsonConverter();
+            if (objectType == typeof(CreditId))
+                contract.Converter = new CreditIdJsonConverter();
+            if (objectType == typeof(LoanApplicationId))
+                contract.Converter = new LoanApplicationIdJsonConverter();
         }
         
         private static void CreateDomainValueObjectResolvers(ref JsonContract contract, Type objectType)
