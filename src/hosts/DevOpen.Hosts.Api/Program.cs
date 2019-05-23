@@ -58,7 +58,7 @@ namespace DevOpen.Hosts.Api
             Log.Information("loanApplicationView: {View}", JsonConvert.SerializeObject(loanApplicationView, Formatting.Indented, SerializerSettings));
             
             
-            // Approve application
+            // Approve application - Process + Builder
             await commandMediator.MediateCommand(new ApproveLoanApplication(applicationId));
 
             

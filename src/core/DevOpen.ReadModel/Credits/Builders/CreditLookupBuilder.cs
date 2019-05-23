@@ -20,7 +20,9 @@ namespace DevOpen.ReadModel.Credits.Builders
             {
                 case CreditRegistered creditRegistered:
                     Log.Information("Handling {Event}, adding credit to lookup read model", nameof(CreditRegistered));
+                    
                     await _creditLookup.AddCreditToLookup(creditRegistered.Id, creditRegistered.OrganisationNumber);
+                    
                     break;
             }
         }

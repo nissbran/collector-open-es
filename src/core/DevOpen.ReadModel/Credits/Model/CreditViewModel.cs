@@ -1,5 +1,6 @@
 using DevOpen.Domain.Model;
 using DevOpen.Domain.Model.Credits;
+using DevOpen.Domain.Model.LoanApplications;
 
 namespace DevOpen.ReadModel.Credits.Model
 {
@@ -11,6 +12,8 @@ namespace DevOpen.ReadModel.Credits.Model
         {
             Id = id;
         }
+        
+        public LoanApplicationId ApplicationId { get; internal set; } = LoanApplicationId.Empty;
         
         public Money LoanAmount { get; internal set; }
         

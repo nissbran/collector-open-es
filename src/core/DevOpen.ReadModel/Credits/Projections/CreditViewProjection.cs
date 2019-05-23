@@ -16,6 +16,10 @@ namespace DevOpen.ReadModel.Credits.Projections
                     model.Balance = Money.Create(0, creditRegistered.LoanAmount.Currency);
                     break;
                 
+                case CreditRegisteredFromLoanApplication fromLoanApplication:
+                    model.ApplicationId = fromLoanApplication.LoanApplicationId;
+                    break;
+                
                 case DisbursementRegistered disbursementRegistered:
                     model.Balance -= disbursementRegistered.Amount;
                     break;

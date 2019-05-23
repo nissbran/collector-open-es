@@ -14,6 +14,11 @@ namespace DevOpen.Domain.Model
             Country = country;
         }
 
+        public override string ToString()
+        {
+            return $"{Country.CodeSymbol}-{Number}";
+        }
+
         public bool Equals(OrganisationNumber other)
         {
             if (ReferenceEquals(null, other)) return false;
