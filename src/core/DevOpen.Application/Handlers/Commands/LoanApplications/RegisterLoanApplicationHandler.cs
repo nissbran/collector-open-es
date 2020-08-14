@@ -8,18 +8,18 @@ namespace DevOpen.Application.Handlers.Commands.LoanApplications
 {
     public class RegisterLoanApplicationHandler : CommandHandler<RegisterLoanApplication>
     {
-        private readonly ILoanApplicationRepository _repository;
+        private readonly ILoanApplicationAggregateStore _aggregateStore;
 
-        public RegisterLoanApplicationHandler(ILoanApplicationRepository repository)
+        public RegisterLoanApplicationHandler(ILoanApplicationAggregateStore aggregateStore)
         {
-            _repository = repository;
+            _aggregateStore = aggregateStore;
         }
         
         public override async Task<CommandExecutionResult> Handle(RegisterLoanApplication command)
         {
             var newApplication = new LoanApplication(command.Id, command);
 
-            await _repository.Save(newApplication);
+            await _aggregateStore.Save(newApplication);
             
             return CommandExecutionResult.Ok;
         }

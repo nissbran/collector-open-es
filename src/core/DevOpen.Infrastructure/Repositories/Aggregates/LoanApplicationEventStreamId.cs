@@ -1,4 +1,3 @@
-using DevOpen.Domain.Model;
 using DevOpen.Domain.Model.LoanApplications;
 using DevOpen.Infrastructure.Persistence.EventStore;
 

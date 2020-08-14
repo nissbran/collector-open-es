@@ -8,9 +8,9 @@ namespace DevOpen.Application.Handlers.Commands.Credits
 {
     public class RegisterCreditHandler : CommandHandler<RegisterCredit>
     {
-        private readonly ICreditRootRepository _repository;
+        private readonly ICreditAggregateStore _repository;
 
-        public RegisterCreditHandler(ICreditRootRepository repository)
+        public RegisterCreditHandler(ICreditAggregateStore repository)
         {
             _repository = repository;
         }

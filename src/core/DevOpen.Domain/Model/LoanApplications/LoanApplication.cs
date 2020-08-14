@@ -9,15 +9,13 @@ namespace DevOpen.Domain.Model.LoanApplications
     {
         public LoanApplicationId Id => State.Id;
         
-        public LoanApplication(LoanApplicationId id, IEnumerable<LoanApplicationDomainEvent> historicEvents) 
-        
-            : base(new LoanApplicationState(id, historicEvents))
+        public LoanApplication(LoanApplicationId id, IEnumerable<LoanApplicationDomainEvent> historicEvents) : 
+            base(new LoanApplicationState(id, historicEvents))
         {
         }
         
-        public LoanApplication(LoanApplicationId id, RegisterLoanApplication cmd) 
-        
-            : base(new LoanApplicationState(id))
+        public LoanApplication(LoanApplicationId id, RegisterLoanApplication cmd) : 
+            base(new LoanApplicationState(id))
         {
             ApplyChange(new LoanApplicationRegistered(cmd.OrganisationNumber, cmd.RequestedAmount));
             

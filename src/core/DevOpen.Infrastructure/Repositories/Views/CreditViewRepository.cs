@@ -1,18 +1,12 @@
 using System.Linq;
 using System.Threading.Tasks;
-using DevOpen.Domain.Model;
 using DevOpen.Domain.Model.Credits;
 using DevOpen.Domain.Model.Credits.Events;
-using DevOpen.Domain.Model.LoanApplications;
-using DevOpen.Domain.Model.LoanApplications.Events;
 using DevOpen.Infrastructure.Persistence.EventStore;
 using DevOpen.Infrastructure.Repositories.Aggregates;
 using DevOpen.ReadModel.Credits;
 using DevOpen.ReadModel.Credits.Model;
 using DevOpen.ReadModel.Credits.Projections;
-using DevOpen.ReadModel.LoanApplications;
-using DevOpen.ReadModel.LoanApplications.Model;
-using DevOpen.ReadModel.LoanApplications.Projections;
 
 namespace DevOpen.Infrastructure.Repositories.Views
 {

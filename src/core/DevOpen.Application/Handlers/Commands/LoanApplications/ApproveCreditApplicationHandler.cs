@@ -7,20 +7,20 @@ namespace DevOpen.Application.Handlers.Commands.LoanApplications
 {
     public class ApproveCreditApplicationHandler : CommandHandler<ApproveLoanApplication>
     {
-        private readonly ILoanApplicationRepository _repository;
+        private readonly ILoanApplicationAggregateStore _aggregateStore;
 
-        public ApproveCreditApplicationHandler(ILoanApplicationRepository repository)
+        public ApproveCreditApplicationHandler(ILoanApplicationAggregateStore aggregateStore)
         {
-            _repository = repository;
+            _aggregateStore = aggregateStore;
         }
         
         public override async Task<CommandExecutionResult> Handle(ApproveLoanApplication command)
         {
-            var application = await _repository.GetById(command.Id);
+            var application = await _aggregateStore.GetById(command.Id);
             
             application.Approve();
 
-            await _repository.Save(application);
+            await _aggregateStore.Save(application);
             
             return CommandExecutionResult.Ok;
         }

@@ -38,7 +38,28 @@ namespace DevOpen.Hosts.Api
             var queryMediator = serviceProvider.GetService<QueryMediator>();
             // -----------------------------------------------------
             
+            //await DemoMode(commandMediator, queryMediator);
+
+            for (int i = 0; i < 10; i++)
+            {
+                var applicationId = LoanApplicationId.NewId();
+
+                await commandMediator.MediateCommand(new RegisterLoanApplication(applicationId)
+                {
+                    OrganisationNumber = new OrganisationNumber("5561682518", Country.Sweden),
+                    RequestedAmount = Money.Create(100000, Currency.SEK),
+                    VisitingAddress = new Address("Demogatan 1", string.Empty, "41420", "Göteborg", "Sverige", string.Empty)
+                });
+                await commandMediator.MediateCommand(new ApproveLoanApplication(applicationId));
+            }
+
+            var creditsForCountry = await queryMediator.MediateQuery(new GetCreditsByCountry(Country.Sweden));
             
+            Log.Information("count: {Count}", creditsForCountry.Count);
+        }
+
+        private static async Task DemoMode(CommandMediator commandMediator, QueryMediator queryMediator)
+        {
             // Register a new application
             var applicationId = LoanApplicationId.NewId();
             var organisationNumber = new OrganisationNumber("5561682518", Country.Sweden);
@@ -49,42 +70,42 @@ namespace DevOpen.Hosts.Api
                 RequestedAmount = Money.Create(100000, Currency.SEK),
                 VisitingAddress = new Address("Demogatan 1", string.Empty, "41420", "Göteborg", "Sverige", string.Empty)
             };
-            
+
             await commandMediator.MediateCommand(registerApplicationCommand);
-            
+
             // Get data (Direct ES query)
             var loanApplicationView = await queryMediator.MediateQuery(new GetLoanApplicationById(applicationId));
 
             Log.Information("loanApplicationView: {View}", JsonConvert.SerializeObject(loanApplicationView, Formatting.Indented, SerializerSettings));
-            
-            
+
+
             // Approve application - Process + Builder
             await commandMediator.MediateCommand(new ApproveLoanApplication(applicationId));
 
-            
+
             // Get data again (Direct ES query)
             var loanApplicationView2 = await queryMediator.MediateQuery(new GetLoanApplicationById(applicationId));
 
             Log.Information("loanApplicationView: {View}", JsonConvert.SerializeObject(loanApplicationView2, Formatting.Indented, SerializerSettings));
-            
-            
+
+            await Task.Delay(2000);
+
             // Credits for org number (ReadModel)
             var credits = await queryMediator.MediateQuery(new GetCreditsByOrganisationNumber(organisationNumber));
 
-            
             // Get credit data (Direct ES query)
             var creditView = await queryMediator.MediateQuery(new GetCreditById(credits.FirstOrDefault()));
-            
+
             Log.Information("creditView: {View}", JsonConvert.SerializeObject(creditView, Formatting.Indented, SerializerSettings));
-            
-            
+
+
             // Register disbursement payout
             await commandMediator.MediateCommand(new RegisterDisbursementPayout(credits.FirstOrDefault(), Money.Create(100000, Currency.SEK)));
 
-            
+
             // Get credit again data (Direct ES query)
             var creditView2 = await queryMediator.MediateQuery(new GetCreditById(credits.FirstOrDefault()));
-            
+
             Log.Information("creditView: {View}", JsonConvert.SerializeObject(creditView2, Formatting.Indented, SerializerSettings));
         }
     }

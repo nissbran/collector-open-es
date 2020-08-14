@@ -10,11 +10,11 @@ using DevOpen.Infrastructure.Persistence.EventStore;
 
 namespace DevOpen.Infrastructure.Repositories.Aggregates
 {
-    public class CreditRootRepository : ICreditRootRepository
+    public class CreditAggregateStore : ICreditAggregateStore
     {
         private readonly IEventStore _eventStore;
 
-        public CreditRootRepository(IEventStore eventStore)
+        public CreditAggregateStore(IEventStore eventStore)
         {
             _eventStore = eventStore;
         }

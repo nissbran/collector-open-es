@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DevOpen.Application.Repositories;
-using DevOpen.Domain;
-using DevOpen.Domain.Model;
 using DevOpen.Domain.Model.LoanApplications;
 using DevOpen.Domain.Model.LoanApplications.Events;
 using DevOpen.Infrastructure.Persistence.EventStore;
 
 namespace DevOpen.Infrastructure.Repositories.Aggregates
 {
-    public class LoanApplicationRootRepository : ILoanApplicationRepository
+    public class LoanApplicationAggregateStore : ILoanApplicationAggregateStore
     {
         private readonly IEventStore _eventStore;
 
-        public LoanApplicationRootRepository(IEventStore eventStore)
+        public LoanApplicationAggregateStore(IEventStore eventStore)
         {
             _eventStore = eventStore;
         }

@@ -6,19 +6,19 @@ namespace DevOpen.ReadModel.Credits.Model
 {
     public class CreditViewModel
     {
-        public CreditId Id { get; }
+        public CreditId CreditId { get; }
         
-        public CreditViewModel(CreditId id)
+        public CreditViewModel(CreditId creditId)
         {
-            Id = id;
+            CreditId = creditId;
         }
         
-        public LoanApplicationId ApplicationId { get; internal set; } = LoanApplicationId.Empty;
+        public LoanApplicationId ApplicationId { get; set; } = LoanApplicationId.Empty;
         
-        public Money LoanAmount { get; internal set; }
+        public Money LoanAmount { get; set; }
         
-        public OrganisationNumber OrganisationNumber { get; internal set; }
+        public OrganisationNumber OrganisationNumber { get; set; }
         
-        public Money Balance { get; internal set; }
+        public Money Balance { get; set; }
     }
 }

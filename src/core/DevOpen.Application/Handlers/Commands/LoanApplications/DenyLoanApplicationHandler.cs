@@ -7,20 +7,20 @@ namespace DevOpen.Application.Handlers.Commands.LoanApplications
 {
     public class DenyLoanApplicationHandler : CommandHandler<DenyLoanApplication>
     {
-        private readonly ILoanApplicationRepository _repository;
+        private readonly ILoanApplicationAggregateStore _aggregateStore;
 
-        public DenyLoanApplicationHandler(ILoanApplicationRepository repository)
+        public DenyLoanApplicationHandler(ILoanApplicationAggregateStore aggregateStore)
         {
-            _repository = repository;
+            _aggregateStore = aggregateStore;
         }
         
         public override async Task<CommandExecutionResult> Handle(DenyLoanApplication command)
         {
-            var application = await _repository.GetById(command.Id);
+            var application = await _aggregateStore.GetById(command.Id);
             
             application.Deny();
 
-            await _repository.Save(application);
+            await _aggregateStore.Save(application);
             
             return CommandExecutionResult.Ok;
         }

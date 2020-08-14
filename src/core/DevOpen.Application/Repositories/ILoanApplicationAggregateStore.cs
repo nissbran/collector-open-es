@@ -5,7 +5,7 @@ using DevOpen.Domain.Model.LoanApplications;
 
 namespace DevOpen.Application.Repositories
 {
-    public interface ILoanApplicationRepository
+    public interface ILoanApplicationAggregateStore
     {
         Task<LoanApplication> GetById(LoanApplicationId applicationId);
 

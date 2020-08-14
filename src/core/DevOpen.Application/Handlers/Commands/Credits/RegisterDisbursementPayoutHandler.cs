@@ -7,9 +7,9 @@ namespace DevOpen.Application.Handlers.Commands.Credits
 {
     public class RegisterDisbursementPayoutHandler : CommandHandler<RegisterDisbursementPayout>
     {
-        private readonly ICreditRootRepository _repository;
+        private readonly ICreditAggregateStore _repository;
 
-        public RegisterDisbursementPayoutHandler(ICreditRootRepository repository)
+        public RegisterDisbursementPayoutHandler(ICreditAggregateStore repository)
         {
             _repository = repository;
         }

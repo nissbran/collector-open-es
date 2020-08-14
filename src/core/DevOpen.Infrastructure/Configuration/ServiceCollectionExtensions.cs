@@ -3,12 +3,14 @@ using DevOpen.Application.Handlers.Queries;
 using DevOpen.Application.Mediators;
 using DevOpen.Application.Processes;
 using DevOpen.Application.Repositories;
+using DevOpen.Infrastructure.Persistence.Elastic;
 using DevOpen.Infrastructure.Persistence.EventStore;
 using DevOpen.Infrastructure.Persistence.Sql;
 using DevOpen.Infrastructure.Repositories.Aggregates;
 using DevOpen.Infrastructure.Repositories.Views;
 using DevOpen.Infrastructure.Serialization;
 using DevOpen.Infrastructure.Serialization.Schemas;
+using DevOpen.Infrastructure.Storage;
 using DevOpen.ReadModel;
 using DevOpen.ReadModel.Credits;
 using DevOpen.ReadModel.LoanApplications;
@@ -53,12 +55,14 @@ namespace DevOpen.Infrastructure.Configuration
         
         public static void AddInfrastructureServices(this IServiceCollection services)
         {
-            services.AddSingleton<ILoanApplicationRepository, LoanApplicationRootRepository>();
+            services.AddSingleton<ILoanApplicationAggregateStore, LoanApplicationAggregateStore>();
             services.AddSingleton<ILoanApplicationViewRepository, LoanApplicationViewRepository>();
-            services.AddSingleton<ICreditRootRepository, CreditRootRepository>();
+            services.AddSingleton<ICreditAggregateStore, CreditAggregateStore>();
             services.AddSingleton<ICreditViewRepository, CreditViewRepository>();
 
             services.AddSingleton<ICreditLookup, CreditSqlLookup>();
+            services.AddSingleton<ICreditViewStore, CreditViewElasticStore>();
+            services.AddSingleton<IApplicationViewStore, ApplicationViewElasticStore>();
             services.AddSingleton<SubscriptionCheckpointStorage>();
         }
         
