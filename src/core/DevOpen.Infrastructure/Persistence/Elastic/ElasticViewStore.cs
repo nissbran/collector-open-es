@@ -15,7 +15,7 @@ namespace DevOpen.Infrastructure.Persistence.Elastic
         protected readonly ElasticClient Client;
         protected readonly ViewModelSerializer Serializer;
 
-        protected ElasticViewStore(string index)
+        protected ElasticViewStore(Action<ConnectionSettings> connectionSettingsOverrides = null)
         {
             var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
             var settings = new ConnectionSettings(pool, (serializer, connectionSettings) => 
@@ -25,7 +25,7 @@ namespace DevOpen.Infrastructure.Persistence.Elastic
                         new CreditIdJsonConverter(), 
                         new LoanApplicationIdJsonConverter()
                     }));
-            settings.DefaultIndex(index);
+            connectionSettingsOverrides?.Invoke(settings);
             Client = new ElasticClient(settings);
             Serializer = new ViewModelSerializer();
         }

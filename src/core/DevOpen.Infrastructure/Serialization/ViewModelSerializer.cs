@@ -24,10 +24,8 @@ namespace DevOpen.Infrastructure.Serialization
         {
             var sb = new StringBuilder(256);
             var sw = new StringWriter(sb, CultureInfo.InvariantCulture);
-            using (var jsonWriter = new JsonTextWriter(sw))
-            {
-                _serializer.Serialize(jsonWriter, value, value.GetType());
-            }
+            using var jsonWriter = new JsonTextWriter(sw);
+            _serializer.Serialize(jsonWriter, value, value.GetType());
 
             return sw.ToString();
         }
@@ -39,10 +37,8 @@ namespace DevOpen.Infrastructure.Serialization
         
         private object Deserialize(string value, Type type)
         {
-            using (var reader = new JsonTextReader(new StringReader(value)))
-            {
-                return _serializer.Deserialize(reader, type);
-            }
+            using var reader = new JsonTextReader(new StringReader(value));
+            return _serializer.Deserialize(reader, type);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace DevOpen.ReadModel.LoanApplications.Projections
                     model.RequestedAmount = applicationRegistered.RequestedAmount;
                     model.OrganisationNumber = applicationRegistered.OrganisationNumber;
                     model.Status = LoanApplicationStatus.Registered;
+                    model.CreditNumber = applicationRegistered.CreditNumber;
                     break;
                 
                 case ApplicationApproved _:

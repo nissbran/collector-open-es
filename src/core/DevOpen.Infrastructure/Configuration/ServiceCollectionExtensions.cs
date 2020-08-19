@@ -14,6 +14,7 @@ using DevOpen.Infrastructure.Storage;
 using DevOpen.ReadModel;
 using DevOpen.ReadModel.Credits;
 using DevOpen.ReadModel.LoanApplications;
+using DevOpen.ReadModel.Search;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DevOpen.Infrastructure.Configuration
@@ -59,10 +60,13 @@ namespace DevOpen.Infrastructure.Configuration
             services.AddSingleton<ILoanApplicationViewRepository, LoanApplicationViewRepository>();
             services.AddSingleton<ICreditAggregateStore, CreditAggregateStore>();
             services.AddSingleton<ICreditViewRepository, CreditViewRepository>();
+            
+            services.AddSingleton<ICreditNumberRepository, CreditNumberSqlStorage>();
 
             services.AddSingleton<ICreditLookup, CreditSqlLookup>();
             services.AddSingleton<ICreditViewStore, CreditViewElasticStore>();
             services.AddSingleton<IApplicationViewStore, ApplicationViewElasticStore>();
+            services.AddSingleton<ISearchViewStore, SearchViewElasticStore>();
             services.AddSingleton<SubscriptionCheckpointStorage>();
         }
         

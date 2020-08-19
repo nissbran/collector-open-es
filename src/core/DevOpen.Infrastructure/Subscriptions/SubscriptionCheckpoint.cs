@@ -13,6 +13,8 @@ namespace DevOpen.Infrastructure.Subscriptions
 
         public long EventsProcessed => _eventsProcessed;
 
+        public bool IsInStartPosition => LastProcessedPosition == 0;
+
         private long _eventsProcessed;
 
         public SubscriptionCheckpoint(Guid subscriptionId, long lastProcessedPosition, long eventsProcessed, DateTime updatedUtc)

@@ -14,9 +14,9 @@ namespace DevOpen.Domain.Model.Credits
         {
         }
         
-        public Credit(CreditId id, RegisterCredit cmd) : base(new CreditState(id))
+        public Credit(CreditId id, RegisterCredit cmd, long creditNumber) : base(new CreditState(id))
         {
-            ApplyChange(new CreditRegistered(cmd.OrganisationNumber, cmd.LoanAmount));
+            ApplyChange(new CreditRegistered(cmd.OrganisationNumber, cmd.LoanAmount, creditNumber));
             
             if (!cmd.InvoiceAddress.IsEmpty)
                 ApplyChange(new InvoiceAddressRegistered(cmd.InvoiceAddress));

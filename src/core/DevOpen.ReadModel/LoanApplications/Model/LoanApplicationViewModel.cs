@@ -12,10 +12,11 @@ namespace DevOpen.ReadModel.LoanApplications.Model
             Id = id;
         }
         
-        public Money RequestedAmount { get; internal set; }
+        public Money RequestedAmount { get; set; }
         
-        public OrganisationNumber OrganisationNumber { get; internal set;}
+        public OrganisationNumber OrganisationNumber { get; set;}
         
-        public LoanApplicationStatus Status { get; internal set; }
+        public LoanApplicationStatus Status { get; set; }
+        public long CreditNumber { get; set; }
     }
 }

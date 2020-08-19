@@ -6,11 +6,11 @@ namespace DevOpen.ReadModel.Credits.Model
 {
     public class CreditViewModel
     {
-        public CreditId CreditId { get; }
+        public CreditId Id { get; }
         
-        public CreditViewModel(CreditId creditId)
+        public CreditViewModel(CreditId id)
         {
-            CreditId = creditId;
+            Id = id;
         }
         
         public LoanApplicationId ApplicationId { get; set; } = LoanApplicationId.Empty;
@@ -20,5 +20,6 @@ namespace DevOpen.ReadModel.Credits.Model
         public OrganisationNumber OrganisationNumber { get; set; }
         
         public Money Balance { get; set; }
+        public long CreditNumber { get; set; }
     }
 }

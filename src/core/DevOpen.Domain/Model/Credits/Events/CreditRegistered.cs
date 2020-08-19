@@ -7,10 +7,13 @@
         
         public Money LoanAmount { get; }
         
-        public CreditRegistered(OrganisationNumber organisationNumber, Money loanAmount)
+        public long CreditNumber { get; }
+        
+        public CreditRegistered(OrganisationNumber organisationNumber, Money loanAmount, long creditNumber)
         {
             OrganisationNumber = organisationNumber;
             LoanAmount = loanAmount;
+            CreditNumber = creditNumber;
         }
     }
 }

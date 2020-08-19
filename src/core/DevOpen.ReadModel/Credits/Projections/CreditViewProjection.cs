@@ -14,6 +14,7 @@ namespace DevOpen.ReadModel.Credits.Projections
                     model.LoanAmount = creditRegistered.LoanAmount;
                     model.OrganisationNumber = creditRegistered.OrganisationNumber;
                     model.Balance = Money.Create(0, creditRegistered.LoanAmount.Currency);
+                    model.CreditNumber = creditRegistered.CreditNumber;
                     break;
                 
                 case CreditRegisteredFromLoanApplication fromLoanApplication:

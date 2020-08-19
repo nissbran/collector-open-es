@@ -37,7 +37,8 @@ namespace DevOpen.Application.Processes
                     await _commandMediator.MediateCommand(new RegisterCredit(creditId, applicationApproved.ApplicationId)
                     {
                         OrganisationNumber = application.OrganisationNumber,
-                        LoanAmount = application.RequestedAmount
+                        LoanAmount = application.RequestedAmount,
+                        CreditNumber = application.CreditNumber
                     });
                     
                     break;

@@ -17,7 +17,7 @@ namespace DevOpen.Application.Handlers.Queries.Credits
         
         public override async Task<IList<CreditId>> Handle(GetCreditsByOrganisationNumber query)
         {
-            return (await _viewStore.GetAllForOrganisationNumber(query.OrganisationNumber)).Select(model => model.CreditId).ToList();
+            return (await _viewStore.GetAllForOrganisationNumber(query.OrganisationNumber)).Select(model => model.Id).ToList();
         }
     }
 }

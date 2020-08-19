@@ -9,36 +9,35 @@ namespace DevOpen.Infrastructure.Storage
 {
     public class ApplicationViewElasticStore : ElasticViewStore, IApplicationViewStore
     {
-        private const string Index = "applications";
-
-        public ApplicationViewElasticStore() : base(Index)
+        public ApplicationViewElasticStore() : base(settings => settings.DefaultIndex(ElasticIndices.Applications))
         {
         }
         
         public async Task<LoanApplicationViewModel> GetById(LoanApplicationId applicationId)
         {
-            var response = await Client.GetAsync<CreditElasticView>(applicationId.ToString());
+            var response = await Client.GetAsync<SearchableElasticView>(applicationId.ToString());
 
             return response.Found ? Serializer.Deserialize<LoanApplicationViewModel>(response.Source.JsonData) : null;
         }
 
         public async Task Upsert(LoanApplicationViewModel viewModel)
         {
-            await Client.IndexAsync(new IndexRequest<ApplicationElasticView>(CreateElasticView(viewModel), Index, viewModel.Id.ToString()));
+            await Client.IndexAsync(new IndexRequest<SearchableElasticView>(CreateElasticView(viewModel), ElasticIndices.Applications, viewModel.Id.ToString()));
         }
 
-        private ApplicationElasticView CreateElasticView(LoanApplicationViewModel viewModel)
+        private SearchableElasticView CreateElasticView(LoanApplicationViewModel viewModel)
         {
-            var elasticView = new ApplicationElasticView
+            var elasticView = new SearchableElasticView
             {
                 Id = viewModel.Id, 
-                JsonData = Serializer.Serialize(viewModel)
+                ViewType = nameof(LoanApplicationViewModel),
+                JsonData = Serializer.Serialize(viewModel),
+                CreditNumber = viewModel.CreditNumber.ToString(),
+                Currency = viewModel.RequestedAmount.Currency.Code,
+                CountryCode = viewModel.OrganisationNumber.Country.CodeSymbol,
+                OrganisationNumber = viewModel.OrganisationNumber.ToString()
             };
             return elasticView;
         }
-    }
-    
-    public class ApplicationElasticView : SearchableElasticView
-    {
     }
 }

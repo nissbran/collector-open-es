@@ -1,14 +1,20 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using DevOpen.Application.Mediators;
 using DevOpen.Domain.Model;
+using DevOpen.Domain.Model.Credits;
 using DevOpen.Domain.Model.Credits.Commands;
 using DevOpen.Domain.Model.LoanApplications;
 using DevOpen.Domain.Model.LoanApplications.Commands;
+using DevOpen.Infrastructure.Persistence.Elastic;
 using DevOpen.Infrastructure.Persistence.EventStore;
 using DevOpen.Infrastructure.Serialization.Resolvers;
 using DevOpen.ReadModel.Credits;
+using DevOpen.ReadModel.Credits.Model;
 using DevOpen.ReadModel.LoanApplications;
+using DevOpen.ReadModel.Search;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -40,7 +46,7 @@ namespace DevOpen.Hosts.Api
             
             //await DemoMode(commandMediator, queryMediator);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var applicationId = LoanApplicationId.NewId();
 
@@ -53,9 +59,40 @@ namespace DevOpen.Hosts.Api
                 await commandMediator.MediateCommand(new ApproveLoanApplication(applicationId));
             }
 
+            var sw = Stopwatch.StartNew();
             var creditsForCountry = await queryMediator.MediateQuery(new GetCreditsByCountry(Country.Sweden));
+            Log.Information("Fetched {Count} 'GetCreditsByCountry' in {Elapsed} ms", creditsForCountry.Count, sw.ElapsedMilliseconds);
+            sw.Restart();
+            creditsForCountry = await queryMediator.MediateQuery(new GetCreditsByCountry(Country.Sweden));
+            Log.Information("Fetched {Count} 'GetCreditsByCountry' in {Elapsed} ms", creditsForCountry.Count, sw.ElapsedMilliseconds);
+            sw.Restart();
+            creditsForCountry = await queryMediator.MediateQuery(new GetCreditsByCountry(Country.Sweden));
+            Log.Information("Fetched {Count} 'GetCreditsByCountry' in {Elapsed} ms", creditsForCountry.Count, sw.ElapsedMilliseconds);
+            sw.Restart();
+            var engagements = await queryMediator.MediateQuery(new SearchForEngagements("123001"));
+            Log.Information("Fetched {Count} 'SearchForEngagements' in {Elapsed} ms", engagements.TotalEngagements, sw.ElapsedMilliseconds);
+            sw.Restart();
+            engagements = await queryMediator.MediateQuery(new SearchForEngagements("123001"));
+            Log.Information("Fetched {Count} 'SearchForEngagements' in {Elapsed} ms", engagements.TotalEngagements, sw.ElapsedMilliseconds);
+            sw.Restart();
+            engagements = await queryMediator.MediateQuery(new SearchForEngagements("123001"));
+            Log.Information("Fetched {Count} 'SearchForEngagements' in {Elapsed} ms", engagements.TotalEngagements, sw.ElapsedMilliseconds);
             
-            Log.Information("count: {Count}", creditsForCountry.Count);
+            //Log.Information("count: {Count}", creditsForCountry.Count);
+
+            var inserter = new ElasticBulkInserter();
+            var credits = new List<CreditViewModel>();
+            for (int i = 0; i < 4000; i++)
+            {
+                credits.Add(new CreditViewModel(CreditId.NewId())
+                {
+                    LoanAmount = Money.Create(20000, Currency.SEK),
+                    CreditNumber = 123321
+                });
+            }
+            sw.Restart();
+            inserter.BulkInsert(credits);
+            Log.Information("Inserted 4000 credits in {Elapsed} ms", sw.ElapsedMilliseconds);
         }
 
         private static async Task DemoMode(CommandMediator commandMediator, QueryMediator queryMediator)

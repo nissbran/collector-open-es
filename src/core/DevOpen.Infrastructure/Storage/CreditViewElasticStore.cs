@@ -12,15 +12,13 @@ namespace DevOpen.Infrastructure.Storage
 {
     public class CreditViewElasticStore : ElasticViewStore, ICreditViewStore
     {
-        private const string Index = "credits";
-
-        public CreditViewElasticStore() : base(Index)
+        public CreditViewElasticStore() : base(settings => settings.DefaultIndex(ElasticIndices.Credits))
         {
         }
         
         public async Task<CreditViewModel> GetById(CreditId creditId)
         {
-            var response = await Client.GetAsync<CreditElasticView>(creditId.ToString());
+            var response = await Client.GetAsync<SearchableElasticView>(creditId.ToString());
 
             return response.Found ? Serializer.Deserialize<CreditViewModel>(response.Source.JsonData) : null;
         }
@@ -28,14 +26,14 @@ namespace DevOpen.Infrastructure.Storage
         public async Task Upsert(CreditViewModel viewModel)
         {
             var view = CreateElasticView(viewModel);
-            await Client.IndexAsync(new IndexRequest<CreditElasticView>(view, Index, view.Id.ToString()));
+            await Client.IndexAsync(new IndexRequest<SearchableElasticView>(view, ElasticIndices.Credits, viewModel.Id.ToString()));
         }
 
         public async Task<IEnumerable<CreditViewModel>> GetAllForCountry(Country country)
         {
-            var searchResponse = await Client.SearchAsync<CreditElasticView>(
-                descriptor => descriptor
-                    .Query(query => query.Term(view => view.Parameters.CountryCode, country.CodeSymbol.ToLowerInvariant())));
+            var searchResponse = await Client.SearchAsync<SearchableElasticView>(
+                descriptor => descriptor.From(0).Size(1000)
+                    .Query(query => query.Term(view => view.CountryCode, country.CodeSymbol.ToLowerInvariant())));
                     
             if (!searchResponse.IsValid)
                 return new List<CreditViewModel>();
@@ -45,46 +43,29 @@ namespace DevOpen.Infrastructure.Storage
 
         public async Task<IEnumerable<CreditViewModel>> GetAllForOrganisationNumber(OrganisationNumber organisationNumber)
         {
-            var searchResponse = await Client.SearchAsync<CreditElasticView>(
-                descriptor => descriptor
-                    .Query(query => query.Term(view => view.Parameters.OrganisationNumber, organisationNumber.ToString().ToLowerInvariant())));
+            var searchResponse = await Client.SearchAsync<SearchableElasticView>(
+                descriptor => descriptor.From(0).Size(100)
+                    .Query(query => query.Term(view => view.OrganisationNumber, organisationNumber.ToString().ToLowerInvariant())));
+            
             if (!searchResponse.IsValid)
                 return new List<CreditViewModel>();
 
             return searchResponse.Documents.Select(ParseViewModel<CreditViewModel>);
         }
 
-        private CreditElasticView CreateElasticView(CreditViewModel viewModel)
+        private SearchableElasticView CreateElasticView(CreditViewModel viewModel)
         {
-            var elasticView = new CreditElasticView
+            var elasticView = new SearchableElasticView()
             {
-                Id = viewModel.CreditId, 
-                JsonData = Serializer.Serialize(viewModel)
+                Id = viewModel.Id, 
+                ViewType = nameof(CreditViewModel),
+                JsonData = Serializer.Serialize(viewModel),
+                CreditNumber = viewModel.CreditNumber.ToString(),
+                Currency = viewModel.LoanAmount.Currency.Code,
+                CountryCode = viewModel.OrganisationNumber.Country.CodeSymbol,
+                OrganisationNumber = viewModel.OrganisationNumber.ToString()
             };
-            elasticView.UpdateSearchParameters(viewModel);
             return elasticView;
         }
-    }
-    
-    public class CreditElasticView : ElasticView
-    {
-        public CreditElasticSearchParameters Parameters { get; set; } = new CreditElasticSearchParameters();
-        
-        public string CountryCode { get; set; }
-
-        public void UpdateSearchParameters(CreditViewModel viewModel)
-        {
-            CountryCode = viewModel.OrganisationNumber.Country.CodeSymbol;
-            Parameters.Currency = viewModel.LoanAmount.Currency.Code;
-            Parameters.CountryCode = viewModel.OrganisationNumber.Country.CodeSymbol;
-            Parameters.OrganisationNumber = viewModel.OrganisationNumber.ToString();
-        }
-    }
-
-    public class CreditElasticSearchParameters
-    {
-        public string CountryCode { get; set; }
-        public string Currency { get; set; }
-        public string OrganisationNumber { get; set; }
     }
 }

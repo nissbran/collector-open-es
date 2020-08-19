@@ -13,6 +13,8 @@ namespace DevOpen.Domain.Model.Credits.Commands
         public Address InvoiceAddress { get; set; } = Address.Empty;
         
         public Money LoanAmount { get; set; }
+        
+        public long? CreditNumber { get; set; }
 
         public RegisterCredit(CreditId id, LoanApplicationId? applicationId = null)
         {

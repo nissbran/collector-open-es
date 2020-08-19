@@ -14,10 +14,10 @@ namespace DevOpen.Domain.Model.LoanApplications
         {
         }
         
-        public LoanApplication(LoanApplicationId id, RegisterLoanApplication cmd) : 
+        public LoanApplication(LoanApplicationId id, RegisterLoanApplication cmd, long creditNumber) : 
             base(new LoanApplicationState(id))
         {
-            ApplyChange(new LoanApplicationRegistered(cmd.OrganisationNumber, cmd.RequestedAmount));
+            ApplyChange(new LoanApplicationRegistered(cmd.OrganisationNumber, cmd.RequestedAmount, creditNumber));
             
             if (!cmd.VisitingAddress.IsEmpty)
                 ApplyChange(new VisitingAddressRegistered(cmd.VisitingAddress));

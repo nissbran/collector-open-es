@@ -1,11 +1,13 @@
 using System;
 using System.Threading.Tasks;
 using DevOpen.Application.Mediators;
+using DevOpen.Infrastructure.Persistence.Elastic;
 using DevOpen.Infrastructure.Persistence.EventStore;
 using DevOpen.Infrastructure.Persistence.Sql;
 using DevOpen.Infrastructure.Serialization;
 using DevOpen.Infrastructure.Subscriptions;
 using EventStore.ClientAPI;
+using Serilog;
 
 namespace DevOpen.Hosts.ReadModelBuilder
 {
@@ -29,6 +31,13 @@ namespace DevOpen.Hosts.ReadModelBuilder
             _checkpointStorage = checkpointStorage;
             
             _subscriptionCheckpoint = _checkpointStorage.Load(SubscriptionCheckpointId);
+
+            if (_subscriptionCheckpoint.IsInStartPosition)
+            {
+                Log.Information("Clearing elastic indices");
+                var indexClearer = new ElasticIndexClearer();
+                indexClearer.ClearIndices();
+            }
             
             LastCommitPosition = _subscriptionCheckpoint.LastProcessedPosition;
         }
@@ -53,6 +62,11 @@ namespace DevOpen.Hosts.ReadModelBuilder
             _subscriptionCheckpoint.SetLastProcessedPosition(newPosition);
             await _checkpointStorage.Save(_subscriptionCheckpoint);
             LastCommitPosition = newPosition;
+        }
+
+        protected override void LiveProcessingStarted(EventStoreCatchUpSubscription subscription)
+        {
+            Log.Information("Live processing started!");
         }
     }
 }

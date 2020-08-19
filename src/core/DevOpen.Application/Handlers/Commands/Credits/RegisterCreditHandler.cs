@@ -8,18 +8,20 @@ namespace DevOpen.Application.Handlers.Commands.Credits
 {
     public class RegisterCreditHandler : CommandHandler<RegisterCredit>
     {
-        private readonly ICreditAggregateStore _repository;
+        private readonly ICreditAggregateStore _aggregateStore;
+        private readonly ICreditNumberRepository _creditNumberRepository;
 
-        public RegisterCreditHandler(ICreditAggregateStore repository)
+        public RegisterCreditHandler(ICreditAggregateStore aggregateStore, ICreditNumberRepository creditNumberRepository)
         {
-            _repository = repository;
+            _aggregateStore = aggregateStore;
+            _creditNumberRepository = creditNumberRepository;
         }
         
         public override async Task<CommandExecutionResult> Handle(RegisterCredit command)
         {
-            var credit = new Credit(command.Id, command);
+            var credit = new Credit(command.Id, command, command.CreditNumber ?? await _creditNumberRepository.GetNextAsync());
 
-            await _repository.Save(credit);
+            await _aggregateStore.Save(credit);
             
             return CommandExecutionResult.Ok;
         }

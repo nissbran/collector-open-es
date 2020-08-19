@@ -1,11 +1,13 @@
 using System;
 using System.Threading.Tasks;
 using DevOpen.Application.Mediators;
+using DevOpen.Infrastructure.Persistence.Elastic;
 using DevOpen.Infrastructure.Persistence.EventStore;
 using DevOpen.Infrastructure.Persistence.Sql;
 using DevOpen.Infrastructure.Serialization;
 using DevOpen.Infrastructure.Subscriptions;
 using EventStore.ClientAPI;
+using Serilog;
 
 namespace DevOpen.Hosts.ProcessManager
 {
