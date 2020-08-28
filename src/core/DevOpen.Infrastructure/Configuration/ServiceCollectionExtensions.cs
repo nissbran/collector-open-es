@@ -1,3 +1,4 @@
+using System;
 using DevOpen.Application.Handlers.Commands;
 using DevOpen.Application.Handlers.Queries;
 using DevOpen.Application.Mediators;
@@ -5,6 +6,8 @@ using DevOpen.Application.Processes;
 using DevOpen.Application.Repositories;
 using DevOpen.Infrastructure.Persistence.Elastic;
 using DevOpen.Infrastructure.Persistence.EventStore;
+using DevOpen.Infrastructure.Persistence.Hybrid;
+using DevOpen.Infrastructure.Persistence.InMemory;
 using DevOpen.Infrastructure.Persistence.Sql;
 using DevOpen.Infrastructure.Repositories.Aggregates;
 using DevOpen.Infrastructure.Repositories.Views;
@@ -64,10 +67,37 @@ namespace DevOpen.Infrastructure.Configuration
             services.AddSingleton<ICreditNumberRepository, CreditNumberSqlStorage>();
 
             services.AddSingleton<ICreditLookup, CreditSqlLookup>();
+            services.AddSingleton<ISearchViewStore, SearchViewElasticStore>();
+            
+            services.AddSingleton<ElasticIndexNameResolver>();
+            services.AddSingleton<ElasticConnectionProvider>();
+            
+            services.AddSingleton<SubscriptionCheckpointStorage>();
+        }
+
+        public static void AddSwitchableViewStores(this IServiceCollection services, Guid subscriptionCheckpointId)
+        {
+            var subscriptionCheckpoint = new SubscriptionCheckpointStorage().Load(subscriptionCheckpointId);
+            if (subscriptionCheckpoint.IsInStartPosition)
+            {
+                services.AddSingleton<CreditInMemoryViewStore>();
+                services.AddSingleton<CreditViewElasticStore>();
+                services.AddSingleton<ICreditViewStore, CreditHybridViewStore>();
+                
+                services.AddSingleton<ApplicationInMemoryViewStore>();
+                services.AddSingleton<ApplicationViewElasticStore>();
+                services.AddSingleton<IApplicationViewStore, ApplicationHybridViewStore>();
+            }
+            else
+            {
+                services.AddViewStores();
+            }
+        }
+
+        public static void AddViewStores(this IServiceCollection services)
+        {
             services.AddSingleton<ICreditViewStore, CreditViewElasticStore>();
             services.AddSingleton<IApplicationViewStore, ApplicationViewElasticStore>();
-            services.AddSingleton<ISearchViewStore, SearchViewElasticStore>();
-            services.AddSingleton<SubscriptionCheckpointStorage>();
         }
         
         public static void AddEventStore(this IServiceCollection services)

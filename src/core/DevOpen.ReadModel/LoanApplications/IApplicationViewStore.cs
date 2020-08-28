@@ -9,5 +9,7 @@ namespace DevOpen.ReadModel.LoanApplications
         Task<LoanApplicationViewModel> GetById(LoanApplicationId applicationId);
 
         Task Upsert(LoanApplicationViewModel viewModel);
+
+        void ClearAll();
     }
 }

@@ -13,7 +13,7 @@ namespace DevOpen.Hosts.ProcessManager
 {
     public class ProcessManagerSubscription : EventStoreCatchUpAllSubscriber
     {
-        private static readonly Guid SubscriptionCheckpointId = Guid.Parse("12efbb94-d23d-4c7a-bda3-ca5d389b17a3");
+        public static readonly Guid SubscriptionCheckpointId = Guid.Parse("12efbb94-d23d-4c7a-bda3-ca5d389b17a3");
         
         private readonly IEventSerializer _eventSerializer;
         private readonly ProcessManagerMediator _mediator;

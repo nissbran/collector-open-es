@@ -14,5 +14,7 @@ namespace DevOpen.ReadModel.Credits
 
         Task<IEnumerable<CreditViewModel>> GetAllForCountry(Country country);
         Task<IEnumerable<CreditViewModel>> GetAllForOrganisationNumber(OrganisationNumber organisationNumber);
+        
+        void ClearAll();
     }
 }

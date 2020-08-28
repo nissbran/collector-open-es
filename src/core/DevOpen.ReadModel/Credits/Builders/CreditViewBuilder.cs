@@ -28,5 +28,18 @@ namespace DevOpen.ReadModel.Credits.Builders
                 await _creditViewStore.Upsert(model);
             }
         }
+
+        public void ClearModel()
+        {
+            _creditViewStore.ClearAll();
+        }
+
+        public void Switch()
+        {
+            if (_creditViewStore is ISwitchable switchableStore)
+            {
+                switchableStore.Switch();
+            }
+        }
     }
 }

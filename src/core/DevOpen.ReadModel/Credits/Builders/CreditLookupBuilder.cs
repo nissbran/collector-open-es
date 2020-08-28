@@ -19,12 +19,18 @@ namespace DevOpen.ReadModel.Credits.Builders
             switch (domainEvent)
             {
                 case CreditRegistered creditRegistered:
-                    Log.Information("Handling {Event}, adding credit to lookup read model", nameof(CreditRegistered));
-                    
                     await _creditLookup.AddCreditToLookup(creditRegistered.Id, creditRegistered.OrganisationNumber);
-                    
                     break;
             }
+        }
+
+        public void ClearModel()
+        {   
+            _creditLookup.ClearAll();
+        }
+
+        public void Switch()
+        {
         }
     }
 }

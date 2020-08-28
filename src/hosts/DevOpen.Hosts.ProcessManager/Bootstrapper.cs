@@ -21,6 +21,7 @@ namespace DevOpen.Hosts.ProcessManager
             
             services.AddApplicationServices();
             services.AddInfrastructureServices();
+            services.AddViewStores();
             
             services.AddEventStore();
 

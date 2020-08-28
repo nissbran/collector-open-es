@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using DevOpen.Application.Mediators;
-using DevOpen.Infrastructure.Persistence.Elastic;
+using DevOpen.Infrastructure.Persistence;
 using DevOpen.Infrastructure.Persistence.EventStore;
 using DevOpen.Infrastructure.Persistence.Sql;
 using DevOpen.Infrastructure.Serialization;
@@ -13,10 +13,11 @@ namespace DevOpen.Hosts.ReadModelBuilder
 {
     public class ReadModelBuilderSubscription : EventStoreCatchUpAllSubscriber
     {
-        private static readonly Guid SubscriptionCheckpointId = Guid.Parse("7c511bd6-04e8-40f6-b07a-94bf9e23009b");
+        public static readonly Guid SubscriptionCheckpointId = Guid.Parse("7c511bd6-04e8-40f6-b07a-94bf9e23009b");
         
         private readonly IEventSerializer _eventSerializer;
         private readonly ReadModelBuilderMediator _mediator;
+        private readonly RebuildCoordinator _rebuildCoordinator;
         private readonly SubscriptionCheckpointStorage _checkpointStorage;
         private readonly SubscriptionCheckpoint _subscriptionCheckpoint;
 
@@ -24,22 +25,30 @@ namespace DevOpen.Hosts.ReadModelBuilder
             IEventStoreConnectionProvider connectionProvider,
             IEventSerializer eventSerializer,
             ReadModelBuilderMediator mediator,
+            RebuildCoordinator rebuildCoordinator,
             SubscriptionCheckpointStorage checkpointStorage) : base("ReadModelBuilder", connectionProvider.Connection, new CatchAllSubscriptionSettings())
         {
             _eventSerializer = eventSerializer;
             _mediator = mediator;
+            _rebuildCoordinator = rebuildCoordinator;
             _checkpointStorage = checkpointStorage;
             
             _subscriptionCheckpoint = _checkpointStorage.Load(SubscriptionCheckpointId);
 
             if (_subscriptionCheckpoint.IsInStartPosition)
             {
-                Log.Information("Clearing elastic indices");
-                var indexClearer = new ElasticIndexClearer();
-                indexClearer.ClearIndices();
+                _rebuildCoordinator.ClearModels();
             }
             
             LastCommitPosition = _subscriptionCheckpoint.LastProcessedPosition;
+        }
+        
+        protected override void BeforeSubscriptionEpochStarts()
+        {
+            if (_subscriptionCheckpoint.IsInStartPosition)
+            {
+                _rebuildCoordinator.StartRebuild();
+            }
         }
         
         protected override bool IsValidEvent(ResolvedEvent resolvedEvent)
@@ -54,6 +63,11 @@ namespace DevOpen.Hosts.ReadModelBuilder
             var domainEvent = _eventSerializer.DeserializeEvent(resolvedEvent);
 
             await _mediator.MediateEvent(domainEvent);
+            
+            if (_rebuildCoordinator.IsRebuilding)
+            {
+                _rebuildCoordinator.ReportRebuildProgress(_subscriptionCheckpoint.EventsProcessed);
+            }
         }
         
         protected override async Task OnUpdateLastCommitPosition(long newPosition)
@@ -66,6 +80,11 @@ namespace DevOpen.Hosts.ReadModelBuilder
 
         protected override void LiveProcessingStarted(EventStoreCatchUpSubscription subscription)
         {
+            if (_rebuildCoordinator.IsRebuilding)
+            {
+                _rebuildCoordinator.FinishRebuild();
+            }
+
             Log.Information("Live processing started!");
         }
     }

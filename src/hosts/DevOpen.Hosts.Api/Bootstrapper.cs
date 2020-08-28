@@ -21,6 +21,7 @@ namespace DevOpen.Hosts.Api
             
             services.AddApplicationServices();
             services.AddInfrastructureServices();
+            services.AddViewStores();
             
             services.AddEventStore();
 

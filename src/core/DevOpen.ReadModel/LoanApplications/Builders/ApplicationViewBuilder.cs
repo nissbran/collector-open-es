@@ -28,5 +28,18 @@ namespace DevOpen.ReadModel.LoanApplications.Builders
                 await _applicationViewStore.Upsert(model);
             }
         }
+
+        public void ClearModel()
+        {
+            _applicationViewStore.ClearAll();
+        }
+
+        public void Switch()
+        {
+            if (_applicationViewStore is ISwitchable switchableStore)
+            {
+                switchableStore.Switch();
+            }
+        }
     }
 }

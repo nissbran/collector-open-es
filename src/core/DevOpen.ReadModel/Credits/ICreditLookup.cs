@@ -9,5 +9,7 @@ namespace DevOpen.ReadModel.Credits
     {
         Task<IList<CreditId>> GetCreditsForOrganisationNumber(OrganisationNumber organisationNumber);
         Task AddCreditToLookup(CreditId creditId, OrganisationNumber organisationNumber);
+
+        void ClearAll();
     }
 }

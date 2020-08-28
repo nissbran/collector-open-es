@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using DevOpen.Infrastructure.Serialization;
 using DevOpen.Infrastructure.Serialization.Converters;
-using DevOpen.Infrastructure.Storage;
 using Elasticsearch.Net;
 using Nest;
 using Nest.JsonNetSerializer;

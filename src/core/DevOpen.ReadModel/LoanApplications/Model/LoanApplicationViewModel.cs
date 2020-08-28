@@ -3,7 +3,7 @@ using DevOpen.Domain.Model.LoanApplications;
 
 namespace DevOpen.ReadModel.LoanApplications.Model
 {
-    public class LoanApplicationViewModel
+    public class LoanApplicationViewModel : IViewModel
     {
         public LoanApplicationId Id { get; }
         

@@ -39,21 +39,32 @@ namespace DevOpen.Infrastructure.Persistence.Sql
 
         public async Task AddCreditToLookup(CreditId creditId, OrganisationNumber organisationNumber)
         {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                const string sql = "INSERT INTO CreditLookup (CreditId, OrganisationNumber, CreatedDate) VALUES (@creditId,@organisationNumber,@createdDate)";
+            using var connection = new SqlConnection(ConnectionString);
+            
+            const string sql = "INSERT INTO CreditLookup (CreditId, OrganisationNumber, CreatedDate) VALUES (@creditId,@organisationNumber,@createdDate)";
                 
-                await connection.OpenAsync();
-                
-                using (var command = new SqlCommand(sql, connection))
-                {
-                    command.Parameters.AddWithValue("@creditId", (Guid) creditId);
-                    command.Parameters.AddWithValue("@organisationNumber", organisationNumber.Number);
-                    command.Parameters.AddWithValue("@createdDate", DateTimeOffset.Now);
+            await connection.OpenAsync();
 
-                    await command.ExecuteNonQueryAsync();
-                }   
-            }
+            using var command = new SqlCommand(sql, connection);
+            
+            command.Parameters.AddWithValue("@creditId", (Guid) creditId);
+            command.Parameters.AddWithValue("@organisationNumber", organisationNumber.Number);
+            command.Parameters.AddWithValue("@createdDate", DateTimeOffset.Now);
+
+            await command.ExecuteNonQueryAsync();
+        }
+
+        public void ClearAll()
+        {
+            using var connection = new SqlConnection(ConnectionString);
+            
+            const string sql = "TRUNCATE TABLE CreditLookup";
+            
+            connection.Open();
+
+            using var command = new SqlCommand(sql, connection);
+
+            command.ExecuteNonQuery();
         }
     }
 }

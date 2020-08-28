@@ -4,7 +4,7 @@ using DevOpen.Domain.Model.LoanApplications;
 
 namespace DevOpen.ReadModel.Credits.Model
 {
-    public class CreditViewModel
+    public class CreditViewModel : IViewModel
     {
         public CreditId Id { get; }
         
@@ -14,11 +14,9 @@ namespace DevOpen.ReadModel.Credits.Model
         }
         
         public LoanApplicationId ApplicationId { get; set; } = LoanApplicationId.Empty;
-        
         public Money LoanAmount { get; set; }
-        
         public OrganisationNumber OrganisationNumber { get; set; }
-        
+        public Country Country { get; set; }
         public Money Balance { get; set; }
         public long CreditNumber { get; set; }
     }

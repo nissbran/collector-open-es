@@ -6,5 +6,9 @@ namespace DevOpen.ReadModel
     public interface IReadModelBuilder
     {
         Task Handle(DomainEvent domainEvent);
+
+        void ClearModel();
+
+        void Switch();
     }
 }

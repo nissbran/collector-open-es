@@ -1,6 +1,6 @@
 using System;
 
-namespace DevOpen.Infrastructure.Storage
+namespace DevOpen.Infrastructure.Persistence.Elastic
 {
     public abstract class ElasticView
     {
