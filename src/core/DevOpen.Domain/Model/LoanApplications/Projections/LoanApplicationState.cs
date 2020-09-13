@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DevOpen.Domain.Model.LoanApplications.Events;
+using DevOpen.Framework.Domain;
 
 namespace DevOpen.Domain.Model.LoanApplications.Projections
 {

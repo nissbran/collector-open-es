@@ -2,14 +2,14 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using DevOpen.Application.Mediators;
 using DevOpen.Domain.Model;
 using DevOpen.Domain.Model.Credits;
 using DevOpen.Domain.Model.Credits.Commands;
 using DevOpen.Domain.Model.LoanApplications;
 using DevOpen.Domain.Model.LoanApplications.Commands;
+using DevOpen.Framework.Application.Mediators;
+using DevOpen.Framework.Infrastructure.Persistence.EventStoreDb;
 using DevOpen.Infrastructure.Persistence.Elastic;
-using DevOpen.Infrastructure.Persistence.EventStore;
 using DevOpen.Infrastructure.Serialization.Resolvers;
 using DevOpen.ReadModel.Credits;
 using DevOpen.ReadModel.Credits.Model;

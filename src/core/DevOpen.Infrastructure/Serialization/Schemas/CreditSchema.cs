@@ -1,4 +1,5 @@
 ﻿using DevOpen.Domain.Model.Credits.Events;
+using DevOpen.Framework.Infrastructure.Serialization.Schemas;
 
 namespace DevOpen.Infrastructure.Serialization.Schemas
 {

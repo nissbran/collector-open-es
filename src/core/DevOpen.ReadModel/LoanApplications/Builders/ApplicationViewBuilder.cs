@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using DevOpen.Domain;
 using DevOpen.Domain.Model.LoanApplications.Events;
+using DevOpen.Framework.Application.ReadModels;
+using DevOpen.Framework.Domain;
 using DevOpen.ReadModel.LoanApplications.Model;
 using DevOpen.ReadModel.LoanApplications.Projections;
 

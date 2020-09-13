@@ -1,7 +1,7 @@
 using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
-using DevOpen.Infrastructure.Subscriptions;
+using DevOpen.Framework.Infrastructure.Subscriptions;
 
 namespace DevOpen.Infrastructure.Persistence.Sql
 {

@@ -1,5 +1,6 @@
 using DevOpen.Domain.Model;
 using DevOpen.Domain.Model.LoanApplications;
+using DevOpen.Framework.Application.ReadModels;
 
 namespace DevOpen.ReadModel.LoanApplications.Model
 {

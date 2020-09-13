@@ -1,9 +1,11 @@
 using System.Threading.Tasks;
-using DevOpen.Application.Mediators;
 using DevOpen.Domain;
 using DevOpen.Domain.Model.Credits;
 using DevOpen.Domain.Model.Credits.Commands;
 using DevOpen.Domain.Model.LoanApplications.Events;
+using DevOpen.Framework.Application.Mediators;
+using DevOpen.Framework.Application.Processes;
+using DevOpen.Framework.Domain;
 using DevOpen.ReadModel.LoanApplications;
 using Serilog;
 

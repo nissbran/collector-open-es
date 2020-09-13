@@ -1,3 +1,5 @@
+using DevOpen.Framework.Application.ReadModels;
+
 namespace DevOpen.ReadModel.Search
 {
     public class SearchForEngagements : Query<SearchResult>

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DevOpen.Domain.Model.Credits;
+using DevOpen.Framework.Application.Handlers;
 using DevOpen.ReadModel.Credits;
 
 namespace DevOpen.Application.Handlers.Queries.Credits

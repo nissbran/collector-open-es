@@ -1,4 +1,5 @@
 using System;
+using DevOpen.Framework.Application.ReadModels;
 using DevOpen.ReadModel;
 using DevOpen.ReadModel.Credits.Model;
 using DevOpen.ReadModel.LoanApplications.Model;

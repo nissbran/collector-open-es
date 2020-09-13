@@ -1,11 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using DevOpen.Application.Mediators;
+using DevOpen.Framework.Application.Mediators;
+using DevOpen.Framework.Infrastructure.Persistence.EventStoreDb;
+using DevOpen.Framework.Infrastructure.Serialization;
+using DevOpen.Framework.Infrastructure.Subscriptions;
 using DevOpen.Infrastructure.Persistence;
-using DevOpen.Infrastructure.Persistence.EventStore;
 using DevOpen.Infrastructure.Persistence.Sql;
 using DevOpen.Infrastructure.Serialization;
-using DevOpen.Infrastructure.Subscriptions;
 using EventStore.ClientAPI;
 using Serilog;
 

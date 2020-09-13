@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using DevOpen.Framework.Application.Handlers;
 using DevOpen.ReadModel.Search;
 
 namespace DevOpen.Application.Handlers.Queries.Search

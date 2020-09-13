@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using DevOpen.Framework.Domain;
 
 namespace DevOpen.Domain.Model.LoanApplications.Events
 {

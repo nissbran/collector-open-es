@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\framework\DevOpen.Framework.Application\DevOpen.Framework.Application.csproj" />
       <ProjectReference Include="..\DevOpen.Domain\DevOpen.Domain.csproj" />
     </ItemGroup>
 

@@ -1,4 +1,6 @@
-﻿namespace DevOpen.Domain.Model.Credits.Events
+﻿using DevOpen.Framework.Domain;
+
+namespace DevOpen.Domain.Model.Credits.Events
 {
     [EventType("CreditRegistered")]
     public class CreditRegistered : CreditDomainEvent

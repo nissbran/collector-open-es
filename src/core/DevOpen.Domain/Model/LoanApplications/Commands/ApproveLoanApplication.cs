@@ -1,3 +1,5 @@
+using DevOpen.Framework.Domain;
+
 namespace DevOpen.Domain.Model.LoanApplications.Commands
 {
     public class ApproveLoanApplication : Command

@@ -6,7 +6,7 @@ using DevOpen.Domain;
 using DevOpen.Domain.Model;
 using DevOpen.Domain.Model.Credits;
 using DevOpen.Domain.Model.Credits.Events;
-using DevOpen.Infrastructure.Persistence.EventStore;
+using DevOpen.Framework.Infrastructure.Persistence.EventStoreDb;
 
 namespace DevOpen.Infrastructure.Repositories.Aggregates
 {

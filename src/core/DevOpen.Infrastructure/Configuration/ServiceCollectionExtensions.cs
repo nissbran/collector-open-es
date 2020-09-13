@@ -1,11 +1,16 @@
 using System;
 using DevOpen.Application.Handlers.Commands;
 using DevOpen.Application.Handlers.Queries;
-using DevOpen.Application.Mediators;
 using DevOpen.Application.Processes;
 using DevOpen.Application.Repositories;
+using DevOpen.Framework.Application.Handlers;
+using DevOpen.Framework.Application.Mediators;
+using DevOpen.Framework.Application.Processes;
+using DevOpen.Framework.Application.ReadModels;
+using DevOpen.Framework.Infrastructure.Persistence.EventStoreDb;
+using DevOpen.Framework.Infrastructure.Serialization;
+using DevOpen.Framework.Infrastructure.Serialization.Schemas;
 using DevOpen.Infrastructure.Persistence.Elastic;
-using DevOpen.Infrastructure.Persistence.EventStore;
 using DevOpen.Infrastructure.Persistence.Hybrid;
 using DevOpen.Infrastructure.Persistence.InMemory;
 using DevOpen.Infrastructure.Persistence.Sql;
@@ -60,9 +65,9 @@ namespace DevOpen.Infrastructure.Configuration
         public static void AddInfrastructureServices(this IServiceCollection services)
         {
             services.AddSingleton<ILoanApplicationAggregateStore, LoanApplicationAggregateStore>();
-            services.AddSingleton<ILoanApplicationViewRepository, LoanApplicationViewRepository>();
+            services.AddSingleton<IApplicationLiveProjectionRepository, ApplicationLiveProjectionRepository>();
             services.AddSingleton<ICreditAggregateStore, CreditAggregateStore>();
-            services.AddSingleton<ICreditViewRepository, CreditViewRepository>();
+            services.AddSingleton<ICreditLiveProjectionRepository, CreditLiveProjectionRepository>();
             
             services.AddSingleton<ICreditNumberRepository, CreditNumberSqlStorage>();
 

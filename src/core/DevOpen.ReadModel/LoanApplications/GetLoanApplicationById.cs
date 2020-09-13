@@ -1,4 +1,5 @@
 using DevOpen.Domain.Model.LoanApplications;
+using DevOpen.Framework.Application.ReadModels;
 using DevOpen.ReadModel.LoanApplications.Model;
 
 namespace DevOpen.ReadModel.LoanApplications

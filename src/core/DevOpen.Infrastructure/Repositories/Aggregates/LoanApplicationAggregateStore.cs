@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using DevOpen.Application.Repositories;
 using DevOpen.Domain.Model.LoanApplications;
 using DevOpen.Domain.Model.LoanApplications.Events;
-using DevOpen.Infrastructure.Persistence.EventStore;
+using DevOpen.Framework.Infrastructure.Persistence.EventStoreDb;
 
 namespace DevOpen.Infrastructure.Repositories.Aggregates
 {

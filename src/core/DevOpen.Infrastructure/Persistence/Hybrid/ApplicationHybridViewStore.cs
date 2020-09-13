@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using DevOpen.Domain.Model.LoanApplications;
+using DevOpen.Framework.Application.ReadModels;
 using DevOpen.Infrastructure.Persistence.InMemory;
 using DevOpen.Infrastructure.Storage;
 using DevOpen.ReadModel;

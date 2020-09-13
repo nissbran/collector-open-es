@@ -1,8 +1,9 @@
 using System.Threading.Tasks;
-using DevOpen.Application.Mediators;
 using DevOpen.Application.Repositories;
 using DevOpen.Domain.Model.LoanApplications;
 using DevOpen.Domain.Model.LoanApplications.Commands;
+using DevOpen.Framework.Application.Handlers;
+using DevOpen.Framework.Application.Mediators;
 
 namespace DevOpen.Application.Handlers.Commands.LoanApplications
 {

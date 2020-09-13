@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using DevOpen.Framework.Application.Handlers;
 using DevOpen.ReadModel.Credits;
 using DevOpen.ReadModel.Credits.Model;
 
@@ -6,16 +7,16 @@ namespace DevOpen.Application.Handlers.Queries.Credits
 {
     public class GetCreditByIdHandler : QueryHandler<GetCreditById, CreditViewModel>
     {
-        private readonly ICreditViewRepository _viewRepository;
+        private readonly ICreditLiveProjectionRepository _liveProjectionRepository;
 
-        public GetCreditByIdHandler(ICreditViewRepository viewRepository)
+        public GetCreditByIdHandler(ICreditLiveProjectionRepository liveProjectionRepository)
         {
-            _viewRepository = viewRepository;
+            _liveProjectionRepository = liveProjectionRepository;
         }
         
         public override async Task<CreditViewModel> Handle(GetCreditById query)
         {
-            return await _viewRepository.GetById(query.CreditId);
+            return await _liveProjectionRepository.GetById(query.CreditId);
         }
     }
 }

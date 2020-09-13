@@ -1,4 +1,5 @@
 using DevOpen.Domain.Model.Credits;
+using DevOpen.Framework.Application.ReadModels;
 using DevOpen.ReadModel.Credits.Model;
 
 namespace DevOpen.ReadModel.Credits

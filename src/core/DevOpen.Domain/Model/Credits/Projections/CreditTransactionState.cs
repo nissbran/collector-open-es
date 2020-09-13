@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DevOpen.Domain.Model.Credits.Events;
+using DevOpen.Framework.Domain;
 
 namespace DevOpen.Domain.Model.Credits.Projections
 {

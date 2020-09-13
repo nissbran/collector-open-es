@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using DevOpen.Infrastructure.Persistence.EventStore;
+using DevOpen.Framework.Infrastructure.Persistence.EventStoreDb;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DevOpen.Hosts.ProcessManager

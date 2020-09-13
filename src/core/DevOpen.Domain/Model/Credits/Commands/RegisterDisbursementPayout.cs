@@ -1,3 +1,5 @@
+using DevOpen.Framework.Domain;
+
 namespace DevOpen.Domain.Model.Credits.Commands
 {
     public class RegisterDisbursementPayout : Command

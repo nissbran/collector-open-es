@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DevOpen.Domain.Model.LoanApplications;
+using DevOpen.Framework.Application.ReadModels;
 using DevOpen.Infrastructure.Persistence.Elastic;
 using DevOpen.Infrastructure.Serialization;
 using DevOpen.ReadModel;

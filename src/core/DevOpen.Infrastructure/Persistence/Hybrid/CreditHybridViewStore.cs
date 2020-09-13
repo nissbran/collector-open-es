@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using DevOpen.Domain.Model;
 using DevOpen.Domain.Model.Credits;
+using DevOpen.Framework.Application.ReadModels;
 using DevOpen.Infrastructure.Persistence.InMemory;
 using DevOpen.Infrastructure.Storage;
 using DevOpen.ReadModel;
@@ -24,21 +25,12 @@ namespace DevOpen.Infrastructure.Persistence.Hybrid
             _elasticViewStore = elasticViewStore;
             _current = inMemoryViewStore;
         }
-        
-        public async Task<CreditViewModel> GetById(CreditId creditId)
-        {
-            return await _current.GetById(creditId);
-        }
 
-        public async Task Upsert(CreditViewModel viewModel)
-        {
-            await _current.Upsert(viewModel);
-        }
+        public async Task<CreditViewModel> GetById(CreditId creditId) => await _current.GetById(creditId);
 
-        public async Task<IEnumerable<CreditViewModel>> GetAllForCountry(Country country)
-        {
-            return await _current.GetAllForCountry(country);
-        }
+        public async Task Upsert(CreditViewModel viewModel) => await _current.Upsert(viewModel);
+
+        public async Task<IEnumerable<CreditViewModel>> GetAllForCountry(Country country) => await _current.GetAllForCountry(country);
 
         public async Task<IEnumerable<CreditViewModel>> GetAllForOrganisationNumber(OrganisationNumber organisationNumber)
         {

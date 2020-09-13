@@ -3,6 +3,6 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Model\Credits\Events\Settings" />
+    <ProjectReference Include="..\..\framework\DevOpen.Framework.Domain\DevOpen.Framework.Domain.csproj" />
   </ItemGroup>
 </Project>

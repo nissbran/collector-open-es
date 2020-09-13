@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using DevOpen.Domain;
 using DevOpen.Domain.Model.Credits.Events;
+using DevOpen.Framework.Application.ReadModels;
+using DevOpen.Framework.Domain;
 using DevOpen.ReadModel.Credits.Model;
 using DevOpen.ReadModel.Credits.Projections;
 

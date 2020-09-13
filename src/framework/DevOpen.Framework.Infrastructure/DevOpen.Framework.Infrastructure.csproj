@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="EventStore.Client" Version="5.0.9" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="Scrutor" Version="3.0.2" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="2.6.1" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+        <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
+        <PackageReference Include="NEST" Version="7.8.2" />
+        <PackageReference Include="NEST.JsonNetSerializer" Version="7.8.2" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\DevOpen.Framework.Application\DevOpen.Framework.Application.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -2,6 +2,7 @@
 using DevOpen.Domain.Model.LoanApplications.Commands;
 using DevOpen.Domain.Model.LoanApplications.Events;
 using DevOpen.Domain.Model.LoanApplications.Projections;
+using DevOpen.Framework.Domain;
 
 namespace DevOpen.Domain.Model.LoanApplications
 {

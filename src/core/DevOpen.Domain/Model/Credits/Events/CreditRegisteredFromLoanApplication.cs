@@ -1,4 +1,5 @@
 using DevOpen.Domain.Model.LoanApplications;
+using DevOpen.Framework.Domain;
 
 namespace DevOpen.Domain.Model.Credits.Events
 {

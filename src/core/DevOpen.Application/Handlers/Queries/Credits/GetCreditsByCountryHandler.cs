@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DevOpen.Framework.Application.Handlers;
 using DevOpen.ReadModel.Credits;
 using DevOpen.ReadModel.Credits.Model;
 
