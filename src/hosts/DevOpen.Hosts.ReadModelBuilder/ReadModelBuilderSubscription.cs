@@ -36,11 +36,6 @@ namespace DevOpen.Hosts.ReadModelBuilder
             
             _subscriptionCheckpoint = _checkpointStorage.Load(SubscriptionCheckpointId);
 
-            if (_subscriptionCheckpoint.IsInStartPosition)
-            {
-                _rebuildCoordinator.ClearModels();
-            }
-            
             LastCommitPosition = _subscriptionCheckpoint.LastProcessedPosition;
         }
         
@@ -48,6 +43,7 @@ namespace DevOpen.Hosts.ReadModelBuilder
         {
             if (_subscriptionCheckpoint.IsInStartPosition)
             {
+                _rebuildCoordinator.ClearModels();
                 _rebuildCoordinator.StartRebuild();
             }
         }
