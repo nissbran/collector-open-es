@@ -19,5 +19,9 @@
     <ItemGroup>
       <ProjectReference Include="..\DevOpen.Framework.Application\DevOpen.Framework.Application.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Persistence\Sql" />
+    </ItemGroup>
 
 </Project>

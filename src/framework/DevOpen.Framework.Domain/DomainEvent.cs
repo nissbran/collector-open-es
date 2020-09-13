@@ -15,5 +15,8 @@ namespace DevOpen.Framework.Domain
         
         [IgnoreDataMember]
         public DateTimeOffset Occurred { get; set; }
+        
+        [IgnoreDataMember]
+        public Guid EventId { get; set; }
     }
 }

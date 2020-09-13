@@ -1,7 +1,7 @@
 version: '3'
 services:
   eventstore:
-    image: eventstore/eventstore:latest
+    image: eventstore/eventstore:release-5.0.8
     container_name: devopen_eventstore
     environment:
       - EVENTSTORE_EXT_IP_ADVERTISE_AS=127.0.0.1
@@ -20,8 +20,8 @@ services:
           - eventstore
   readmodel_sqlserver:
     build:
-      context: ./docker/readmodel/
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: docker/readmodel/dockerfile
     container_name: readmodel_sqlserver
     ports:
       - 1433:1433

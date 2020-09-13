@@ -8,18 +8,25 @@ namespace DevOpen.Framework.Application.Mediators
 {
     public class ProcessManagerMediator
     {
+        private readonly IProcessedEventsStorage _processedEventsStorage;
         private readonly List<IProcessManager> _processManagers;
 
-        public ProcessManagerMediator(IEnumerable<IProcessManager> processManagers)
+        public ProcessManagerMediator(IEnumerable<IProcessManager> processManagers, IProcessedEventsStorage processedEventsStorage)
         {
+            _processedEventsStorage = processedEventsStorage;
             _processManagers = processManagers.ToList();
         }
         
         public async Task MediateEvent(DomainEvent domainEvent)
         {
-            foreach (var processManager in _processManagers)
+            foreach (var processManager in _processManagers.Where(processManager => processManager.CanProcess(domainEvent)))
             {
-                await processManager.Handle(domainEvent);
+                if (await _processedEventsStorage.Exists(processManager.ProcessName, domainEvent.GetType().Name, domainEvent.EventId))
+                    continue;
+                
+                await processManager.Process(domainEvent);
+                
+                await _processedEventsStorage.Add(processManager.ProcessName, domainEvent.GetType().Name, domainEvent.EventId);
             }
         }
     }

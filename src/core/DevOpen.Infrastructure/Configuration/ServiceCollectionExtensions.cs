@@ -1,4 +1,5 @@
 using System;
+using DevOpen.Application.Handlers;
 using DevOpen.Application.Handlers.Commands;
 using DevOpen.Application.Handlers.Queries;
 using DevOpen.Application.Processes;
@@ -38,25 +39,25 @@ namespace DevOpen.Infrastructure.Configuration
             services.AddSingleton<ReadModelBuilderMediator>();
             
             services.Scan(scan => scan
-                .FromAssembliesOf(typeof(ICommandHandler))
+                .FromAssembliesOf(typeof(ApplicationLayerAssembly))
                 .AddClasses(classes => classes.AssignableTo(typeof(ICommandHandler)))
                 .AsImplementedInterfaces()
             );
             
             services.Scan(scan => scan
-                .FromAssembliesOf(typeof(IQueryHandler))
+                .FromAssembliesOf(typeof(ApplicationLayerAssembly))
                 .AddClasses(classes => classes.AssignableTo(typeof(IQueryHandler)))
                 .AsImplementedInterfaces()
             );
             
             services.Scan(scan => scan
-                .FromAssembliesOf(typeof(IProcessManager))
+                .FromAssembliesOf(typeof(ApplicationLayerAssembly))
                 .AddClasses(classes => classes.AssignableTo(typeof(IProcessManager)))
                 .AsImplementedInterfaces()
             );
             
             services.Scan(scan => scan
-                .FromAssembliesOf(typeof(IReadModelBuilder))
+                .FromAssembliesOf(typeof(ReadModelLayerAssembly))
                 .AddClasses(classes => classes.AssignableTo(typeof(IReadModelBuilder)))
                 .AsImplementedInterfaces()
             );
@@ -78,6 +79,7 @@ namespace DevOpen.Infrastructure.Configuration
             services.AddSingleton<ElasticConnectionProvider>();
             
             services.AddSingleton<SubscriptionCheckpointStorage>();
+            services.AddSingleton<IProcessedEventsStorage, ProcessedEventsSqlStorage>();
         }
 
         public static void AddSwitchableViewStores(this IServiceCollection services, Guid subscriptionCheckpointId)

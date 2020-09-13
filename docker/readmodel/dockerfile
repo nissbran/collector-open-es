@@ -1,26 +1,12 @@
-FROM microsoft/mssql-server-linux:2017-CU13
-
-RUN apt-get update && apt-get install -y  \
-	curl \
-	apt-transport-https
-
-# https://docs.microsoft.com/en-us/sql/connect/odbc/linux/installing-the-microsoft-odbc-driver-for-sql-server-on-linux
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
-RUN apt-get update
-RUN ACCEPT_EULA=Y apt-get install -y \
-    mssql-tools
-
-RUN apt-get install -y locales \
-    && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
-    && locale-gen
+FROM mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
 
 ENV PATH="/opt/mssql-tools/bin:${PATH}"
 
-COPY ./sql/ /opt/mssql-scripts/
+COPY docker/readmodel/sql/ /opt/mssql-scripts/
+
 ENV SA_PASSWORD=GqMxaCiCKEzWTT6hdMwBDArb7ZnHboVmawNgL7YFkNU2A
 ENV ACCEPT_EULA=Y
 
-RUN /opt/mssql/bin/sqlservr --accept-eula & sleep 10 \
+RUN /opt/mssql/bin/sqlservr --accept-eula & sleep 20 \
     && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'GqMxaCiCKEzWTT6hdMwBDArb7ZnHboVmawNgL7YFkNU2A' -i /opt/mssql-scripts/*.sql \
-    && pkill sqlservr 
+    && pkill sqlservr

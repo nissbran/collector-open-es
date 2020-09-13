@@ -78,6 +78,7 @@ namespace DevOpen.Infrastructure.Serialization
             domainEvent.AggregateId = metadata.AggregateRootId;
             domainEvent.Occurred = metadata.Occurred;
             domainEvent.EventNumber = resolvedEvent.Event.EventNumber;
+            domainEvent.EventId = resolvedEvent.Event.EventId;
 
             return domainEvent;
         }

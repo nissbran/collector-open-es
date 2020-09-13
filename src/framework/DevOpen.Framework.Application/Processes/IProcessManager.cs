@@ -5,6 +5,10 @@ namespace DevOpen.Framework.Application.Processes
 {
     public interface IProcessManager 
     {
-        Task Handle(DomainEvent domainEvent);
+        string ProcessName { get; }
+
+        bool CanProcess(DomainEvent domainEvent);
+
+        Task Process(DomainEvent domainEvent);
     }
 }

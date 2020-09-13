@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using DevOpen.Domain;
 using DevOpen.Domain.Model.Credits;
 using DevOpen.Domain.Model.Credits.Commands;
 using DevOpen.Domain.Model.LoanApplications.Events;
@@ -21,8 +20,15 @@ namespace DevOpen.Application.Processes
             _commandMediator = commandMediator;
             _queryMediator = queryMediator;
         }
-        
-        public async Task Handle(DomainEvent domainEvent)
+
+        public string ProcessName => "LoanApplicationProcess";
+
+        public bool CanProcess(DomainEvent domainEvent)
+        {
+            return domainEvent is ApplicationApproved;
+        }
+
+        public async Task Process(DomainEvent domainEvent)
         {
             var loanApplicationEvent = domainEvent as LoanApplicationDomainEvent;
             
