@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using DevOpen.Infrastructure.Configuration;
 using EventStore.ClientAPI;
@@ -15,9 +16,7 @@ namespace DevOpen.Infrastructure.Persistence.EventStore
     {
         public EventStoreConnectionProvider()
         {
-            Connection = EventStoreConnectionFactory.Create(
-                "ConnectTo=tcp://localhost:1113",
-                "admin", "changeit");
+            Connection = EventStoreConnectionFactory.Create(new Uri("tcp://admin:changeit@localhost:1113"));
         }
 
         public IEventStoreConnection Connection { get; }

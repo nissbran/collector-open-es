@@ -1,39 +1,22 @@
-version: '3'
 services:
   eventstore:
-    image: eventstore/eventstore:latest
-    container_name: devopen_eventstore
-    environment:
-      - EVENTSTORE_EXT_IP_ADVERTISE_AS=127.0.0.1
-      - EVENTSTORE_EXT_HTTP_PREFIXES=http://*:2113/
+    image: eventstore/eventstore:21.2.0-buster-slim
     ports:
-     - 1113:1113
-     - 2113:2113
-    restart: always
-    healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:2113/stats || exit 1"]
-      interval: 5s
-      timeout: 2s
-    networks: 
-      devopennetwork:
-        aliases: 
-          - eventstore
+      - 2113:2113
+      - 1113:1113
+    environment:
+      EVENTSTORE_EXT_HTTP_PORT: 2113
+      EVENTSTORE_EXT_TCP_PORT: 1113
+      EVENTSTORE_RUN_PROJECTIONS: all
+      EVENTSTORE_START_STANDARD_PROJECTIONS: 'true'
+      PROJECTION_THREADS: 8
+      EVENTSTORE_INSECURE: true
+      EVENTSTORE_ENABLE_EXTERNAL_TCP: true
+      EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP: true
+
   readmodel_sqlserver:
     build:
       context: ./docker/readmodel/
       dockerfile: Dockerfile
-    container_name: readmodel_sqlserver
     ports:
       - 1433:1433
-    healthcheck:
-      test: sqlcmd -S readmodel -U SA -P 'GqMxaCiCKEzWTT6hdMwBDArb7ZnHboVmawNgL7YFkNU2A' -Q 'select 1'
-      interval: 10s
-      timeout: 5s
-    networks:
-      devopennetwork:
-        aliases:
-          - readmodel
-
-networks:
-  devopennetwork:
-    driver: bridge

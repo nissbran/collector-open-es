@@ -2,7 +2,7 @@ using System;
 
 namespace DevOpen.Domain.Model.Credits
 {
-    public struct CreditId : IEquatable<CreditId>
+    public readonly struct CreditId : IEquatable<CreditId>
     {
         private readonly Guid _value;
 

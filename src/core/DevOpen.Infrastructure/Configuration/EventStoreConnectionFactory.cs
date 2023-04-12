@@ -1,31 +1,24 @@
 ﻿using System;
 using EventStore.ClientAPI;
-using EventStore.ClientAPI.SystemData;
 
 namespace DevOpen.Infrastructure.Configuration
 {
     public static class EventStoreConnectionFactory
     {
         public static IEventStoreConnection Create(
-            string connectionString,
-            string username,
-            string password,
+            Uri connectionString,
             ILogger customLogger = null,
             string connectionName = null)
         {
             var connectionSettings = ConnectionSettings.Create()
-                .FailOnNoServerResponse()
-                .KeepReconnecting()
-                .KeepRetrying()
-                .SetMaxDiscoverAttempts(int.MaxValue)
-                .SetHeartbeatTimeout(TimeSpan.FromSeconds(5))
-                .SetGossipTimeout(TimeSpan.FromSeconds(5))
-                .SetDefaultUserCredentials(new UserCredentials(username, password));
+                .UseConsoleLogger()
+                .DisableTls()
+                .DisableServerCertificateValidation();
 
             if (customLogger != null)
                 connectionSettings.UseCustomLogger(customLogger);
 
-            return EventStoreConnection.Create(connectionString, connectionSettings, connectionName);
+            return EventStoreConnection.Create(connectionSettings, connectionString, connectionName);
         }
     }
 }
